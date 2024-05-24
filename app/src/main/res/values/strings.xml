@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Kukuliner</string>
+    <string name="description_1">Kamu bingung cari Kuliner yang Unik?\nTenang ada Kukuliner</string>
+    <string name="description_2">Aplikasi penjelajah Kuliner khas daerah Pulau Jawa\ndi tempat kamu berada</string>
 </resources>

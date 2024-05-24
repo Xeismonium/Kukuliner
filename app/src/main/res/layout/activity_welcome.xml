@@ -5,6 +5,59 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     tools:context=".ui.welcome.WelcomeActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="304dp"
+        android:layout_height="297dp"
+        android:layout_marginTop="75dp"
+        android:src="@drawable/logcap"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/description_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/ltsaeada_extrabold"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:text="@string/description_1"
+        app:layout_constraintBottom_toBottomOf="@id/logo"
+        app:layout_constraintLeft_toLeftOf="@id/logo"
+        app:layout_constraintRight_toRightOf="@id/logo"/>
+
+    <TextView
+        android:id="@+id/description_reguler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/ltsaeada_regular"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="11sp"
+        android:text="@string/description_2"
+        app:layout_constraintTop_toBottomOf="@id/description_bold"
+        app:layout_constraintLeft_toLeftOf="@id/logo"
+        app:layout_constraintRight_toRightOf="@id/logo"/>
+
+    
+    <Button
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="50dp"
+        android:text="Lanjutkan"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/ltsaeada_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
