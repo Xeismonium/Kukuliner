@@ -10,12 +10,12 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="304dp"
-        android:layout_height="297dp"
-        android:layout_marginTop="75dp"
+        android:layout_width="364dp"
+        android:layout_height="357dp"
         android:src="@drawable/logcap"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:fontFamily="@font/ltsaeada_extrabold"
         android:textColor="@color/white"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:text="@string/description_1"
         app:layout_constraintBottom_toBottomOf="@id/logo"
         app:layout_constraintLeft_toLeftOf="@id/logo"
@@ -40,7 +40,7 @@
         android:fontFamily="@font/ltsaeada_regular"
         android:textColor="@color/white"
         android:textAlignment="center"
-        android:textSize="11sp"
+        android:textSize="13sp"
         android:text="@string/description_2"
         app:layout_constraintTop_toBottomOf="@id/description_bold"
         app:layout_constraintLeft_toLeftOf="@id/logo"
@@ -50,7 +50,7 @@
     <Button
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="300dp"
-        android:layout_height="45dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="50dp"
         android:text="Lanjutkan"
         android:textColor="@color/white"
