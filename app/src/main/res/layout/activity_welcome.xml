@@ -50,11 +50,12 @@
 
     
     <Button
+        android:id="@+id/button_next"
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_marginBottom="50dp"
-        android:text="Lanjutkan"
+        android:text="@string/next"
         android:textColor="@color/white"
         android:backgroundTint="@color/black"
         android:fontFamily="@font/ltsaeada_regular"

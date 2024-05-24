@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomSearchBar" parent="Widget.Material3.SearchBar">
+        <item name="android:textColorHint">#7A7979</item>
+        <item name="fontFamily">@font/ltsaeada_regular</item>
+    </style>
+</resources>
