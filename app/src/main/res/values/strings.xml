@@ -4,4 +4,7 @@
     <string name="description_2">Aplikasi penjelajah Kuliner khas daerah Pulau Jawa\ndi tempat kamu berada</string>
     <string name="next">Lanjutkan</string>
     <string name="search_food">Cari Makanan...</string>
+    <string name="favorite">Favorite</string>
+    <string name="settings">Settings</string>
+    <string name="location">Location</string>
 </resources>

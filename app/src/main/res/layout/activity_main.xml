@@ -7,19 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <!-- NestedScrollingChild goes here (NestedScrollView, RecyclerView, etc.). -->
-
     <com.google.android.material.search.SearchBar
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/search_food"
         android:textAppearance="@style/CustomSearchBar"
+        app:menu="@menu/search_menu"
         app:navigationIconTint="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </com.google.android.material.search.SearchBar>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.search.SearchView
         android:id="@+id/search_view"
@@ -31,6 +29,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </com.google.android.material.search.SearchView>
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/map_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/map"
+        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintLeft_toLeftOf="@id/search_bar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/location"
+        android:textAppearance="@style/CustomSearchBar"
+        app:layout_constraintTop_toTopOf="@id/map_icon"
+        app:layout_constraintBottom_toBottomOf="@id/map_icon"
+        app:layout_constraintStart_toEndOf="@id/map_icon"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/map_icon"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
