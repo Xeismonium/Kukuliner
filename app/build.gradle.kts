@@ -51,4 +51,10 @@ dependencies {
 
     // Splash Screen
     implementation(libs.androidx.core.splashscreen)
+
+    // Glide
+    implementation(libs.glide)
+
+    // Gson
+    implementation(libs.gson)
 }
