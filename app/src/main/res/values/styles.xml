@@ -3,6 +3,6 @@
     <style name="CustomSearchBar" parent="Widget.Material3.SearchBar">
         <item name="android:textColorHint">#7A7979</item>
         <item name="fontFamily">@font/ltsaeada_regular</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">17sp</item>
     </style>
 </resources>
