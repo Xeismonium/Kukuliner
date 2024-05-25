@@ -1,0 +1,94 @@
+{
+  "listKuliner": [
+    {
+      "id": "1",
+      "name": "Sate Bandeng",
+      "description": "Sate Bandeng adalah masakan tradisional khas Banten, Indonesia. Sate Bandeng dibuat dari ikan bandeng  yang dihilangkan durinya, dagingnya dibumbui dan dimasukkan kembali ke kulitnya, lalu ditusuk atau dijepit tusukan tangkai bambu, lalu dibakar di atas bara arang. ",
+      "photoUrl": "https://ik.imagekit.io/tvlk/blog/2021/06/sate-bandeng-_shutterstock_1893274882.jpg",
+      "estimatePrice": "Rp25.000 - Rp40.000",
+      "lat": -6.120694599999999,
+      "lon": 106.1501611
+    },
+    {
+      "id": "2",
+      "name": "Pecak Bandeng",
+      "description": "Pecak bandeng mulanya merupakan menu ikan bandeng yang dibakar lalu diberi sambal. Menu ini benar-benar gurih dengan tekstur daging yang lembut, dengan sensasi smokey dari proses pembakarannya.",
+      "photoUrl": "https://i0.wp.com/bantenaktual.com/wp-content/uploads/2022/08/013006100_1597808560-shutterstock_1733928230.jpg",
+      "estimatePrice": "Rp25.000 - Rp35.000",
+      "lat": -6.1200252,
+      "lon": 106.1503437
+    },
+    {
+      "id": "3",
+      "name": "Rabeg",
+      "description": "Rabeg adalah masakan tradisional yang berasal dari perpaduan bumbu khas Jazirah Arab dan Banten,yang terbuat dari daging kambing yang memakai bumbu sederhana. Rasanya gurih dan tidak terlalu berbahaya untuk yang menderita kolesterol karena makanan khas Jawa Serang ini tidak memakai santan dalam proses pengolahannya.",
+      "photoUrl": "https://genpi.id/wp-content/uploads/2021/07/foto-gambar-Rabeg-kambing-khas-Banten-@rabegkambing_mamamimin.jpg",
+      "estimatePrice": "Rp20.000 - Rp30.000",
+      "lat": -6.0584589,
+      "lon": 106.1581705
+    },
+    {
+      "id": "4",
+      "name": "Nasi Gonjleng",
+      "description": "Nasi gonjleng merupakan masakan olahan nasi khas yang berasal dari sekitar wilayah Banten. Hampir disetiap Kota/Kabupaten di Banten dapat ditemui tradisi menu masakan tersebut. Bentuk dan rasanya mirip dan menyerupai nasi samin atau nasi kebuli khas Timur Tengah.  Menu ini diduga merupakan hasil perpaduan dua kebudayaan, Timur Tengah dan Nusantara khususnya Banten. Nasi gonjleng umumnya hanya tersaji pada hari-hari besar seperti Lebaran (Idul Fitri), Isra Mikraj, atau Maulid Nabi Muhammad bagi warga Banten.",
+      "photoUrl": "https://cdn.idntimes.com/content-images/community/2020/02/17125898-1923072857928294-2251808790166896640-n-28ce158b4cbf59800d9f7bec4e6c477c_600x400.jpg",
+      "estimatePrice": "Rp15.000 - Rp25.000",
+      "lat": -6.0170335,
+      "lon": 106.0543356
+    },
+    {
+      "id": "5",
+      "name": "Nasi Bakar Sumsum",
+      "description": "Nasi bakar sumsum, yang dikenal sebagai hidangan khas dari Serang, Banten.Hidangan ini berawal dari seorang tukang potong hewan yang merasa sisa-sisa tulang akan mubazir jika dibuang begitu saja dan membawanya pulang. Tulang yang ia bawa ini menarik perhatian seorang pembeli yang kemudian memecah tulang-tulang tersebut agar lebih mudah untuk dijual. Sisa bagian sumsum dari tulang-tulang itu diolah oleh istri pembeli, dan dicampurkan ke dalam nasi dan dibakar.Karena hasilnya ternyata enak, hal itu menyebar dari mulut ke mulut.",
+      "photoUrl": "https://cdn0-production-images-kly.akamaized.net/-SD5hOXftpqilBOXOG-aMzVfIuc=/0x401:5184x3323/1360x766/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3563515/original/000252200_1630988080-shutterstock_1724682223.jpg",
+      "estimatePrice": "Rp20.000 - Rp30.000",
+      "lat": -6.1184477,
+      "lon": 106.1575007
+    },
+    {
+      "id": "6",
+      "name": "Angeun Lada",
+      "description": "Angeun lada adalah sayur kuah pedas khas Banten berisi daging dan jeroan sapi seperti jantung, limpa, babat, atau usus. Cara membuat angeun lada cukup tumis bumbu dan jeroan, lalu tuang kaldu dan masak sampai matang. Angeun lada yang hangat ini cocok disantap saat cuaca dingin.",
+      "photoUrl": "https://cdn0-production-images-kly.akamaized.net/cMYOErRuWnD6I-tXmeQe93YzMEs=/0x62:999x625/1360x766/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3564766/original/068875400_1631076072-shutterstock_1556072225.jpg",
+      "estimatePrice": "Rp25.000 - Rp30.000",
+      "lat": -6.3010192,
+      "lon": 106.1095591
+    },
+    {
+      "id": "7",
+      "name": "Gerem Asem",
+      "description": "Gerem asem merupakan salah satu warisan budaya tak benda yang sudah ada sejak zaman kesultanan Banten. Kuliner yang bercitarasa pedas dan asam ini menjadi salah satu masakan favorit serta andalan masyarakat Banten khususnya kota Serang.",
+      "photoUrl": "https://cdn0-production-images-kly.akamaized.net/fSFOKGG112C6gbZx3q6EmagFFL4=/1x91:1000x654/1360x766/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3928673/original/027735000_1644397854-shutterstock_1948535629.jpg",
+      "estimatePrice": "Rp20.000 - Rp30.000",
+      "lat": -6.119602400000001,
+      "lon": 106.1965714
+    },
+    {
+      "id": "8",
+      "name": "Ketan Bintul",
+      "description": "Ketan bintul adalah makanan khas Banten berbahan ketan dan taburan serundeng sejenis kelapa parut yang disangrai dengan rempah-rempah. Bisa pula disajikan dengan gulai kambing atau semur daging. Ketan bintul dapat dijumpai di pasar-pasar tradisional atau di toko-toko kue. Hidangan ini sering dijumpai sebagai menu pembuka puasa di bulan Ramadan.",
+      "photoUrl": "https://cdn0-production-images-kly.akamaized.net/DlBqlIoP6gBYp8TBanGhKsQFGEo=/0x2409:3999x4663/1360x766/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3563507/original/021167000_1630987914-shutterstock_1867555525.jpg",
+      "estimatePrice": "Rp20.000 - Rp30.000",
+      "lat": -6.1111495,
+      "lon": 106.1543951
+    },
+    {
+      "id": "9",
+      "name": "Balok Menes",
+      "description": "Balok menes memiliki bentuk dan rasa yang mirip getuk dengan tambahan serundeng dan bawang goreng. Salah satu yang unik dari balok menes adalah cara membungkusnya yang menggunakan daun pisang sehingga menimbulkan aroma harum dan lembut yang membuatnya disukai banyak orang.",
+      "photoUrl": "https://garuda.industry.co.id/uploads/berita/detail/59404.jpg",
+      "estimatePrice": "Rp20.000 - Rp30.000",
+      "lat": -6.383685000000001,
+      "lon": 105.9120141
+    },
+    {
+      "id": "10",
+      "name": "Sate Bebek",
+      "description": "sate bebek Cibeber sudah terasa enaknya walau belum diberi bumbu saji. Hal ini menjadikan sate bebek Cibeber sering kali dimakan tanpa bumbu saji dan tanpa lontong/nasi/ketupat. Ada kesan kenyal, manis dan gurih, serta aroma  wangi, sekalipun sate baru diangkat dari perapian.",
+      "photoUrl": "https://www.djkn.kemenkeu.go.id/files/images/2022/12/satebebek.png",
+      "estimatePrice": "Rp20.000 - Rp30.000",
+      "lat": -6.0277783,
+      "lon": 106.0731215
+    }
+  ]
+}
