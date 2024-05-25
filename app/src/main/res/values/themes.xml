@@ -3,13 +3,13 @@
     <style name="Base.Theme.Kukuliner" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/primary</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
-    <style name="Theme.Kukuliner.Starting" parent="Theme.SplashScreen">
+    <style name="Theme.Kukuliner.Starting" parent="Base.Theme.Kukuliner">
         <!-- Set the splash screen background to black -->
         <item name="android:windowBackground">@color/dark_gray</item>
-        <!-- Use windowSplashScreenAnimatedIcon to add a drawable or an animated drawable. -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen</item>
         <!-- Set the theme of the Activity that follows your splash screen. -->
         <item name="postSplashScreenTheme">@style/Base.Theme.Kukuliner</item>
     </style>

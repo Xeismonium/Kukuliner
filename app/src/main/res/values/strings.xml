@@ -9,4 +9,9 @@
     <string name="location">Location</string>
     <string name="food_image">Food Image</string>
     <string name="food_name">Food Name</string>
+    <string name="estimate_price">estimate_price</string>
+    <string name="lihat_di_maps">Lihat di Maps</string>
+    <string name="estimasi_harga_rp_0">Estimasi Harga: Rp. 0</string>
+    <string name="deskripsi_makanan">Deskripsi Makanan</string>
+    <string name="back_to_main_menu">Back to Main Menu</string>
 </resources>

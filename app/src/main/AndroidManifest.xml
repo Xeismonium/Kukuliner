@@ -15,9 +15,8 @@
         android:theme="@style/Theme.Kukuliner.Starting"
         tools:targetApi="31">
         <activity
-            android:name=".ui.welcome.WelcomeActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Kukuliner.Starting">
+            android:name=".ui.welcome.Splash_Screen"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,9 +24,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.detail.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.welcome.WelcomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Kukuliner.Starting">
+        </activity>
+        <activity
             android:name=".ui.main.MainActivity"
             android:exported="false"
-            android:theme="@style/Base.Theme.Kukuliner"/>
+            android:theme="@style/Base.Theme.Kukuliner" />
     </application>
 
 </manifest>

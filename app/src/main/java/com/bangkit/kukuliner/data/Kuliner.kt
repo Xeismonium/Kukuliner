@@ -1,4 +1,4 @@
-package com.bangkit.kukuliner.ui
+package com.bangkit.kukuliner.data
 
 data class Kuliner(
     val id: String,
