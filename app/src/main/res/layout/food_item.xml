@@ -6,7 +6,7 @@
     style="@style/Widget.Material3.CardView.Elevated"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_margin="4dp"
     android:layout_gravity="center">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,8 +15,8 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_image"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,13 +34,40 @@
             android:id="@+id/food_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:fontFamily="@font/ltsaeada_regular"
             android:maxLength="20"
             android:maxLines="1"
             android:text="@string/food_name"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/card_image"/>
+            app:layout_constraintTop_toBottomOf="@id/card_image"
+            app:layout_constraintStart_toStartOf="@id/card_image"/>
+
+        <ImageView
+            android:id="@+id/food_favorite"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/heart"
+            app:layout_constraintRight_toRightOf="@id/card_image"
+            app:layout_constraintTop_toTopOf="@id/food_name"
+            app:layout_constraintBottom_toBottomOf="@id/food_name"/>
+
+        <TextView
+            android:id="@+id/food_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Estimasi Harga: Rp. 15.000"
+            android:textSize="9sp"
+            android:fontFamily="@font/ltsaeada_light"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/food_name"
+            app:layout_constraintTop_toBottomOf="@id/food_name"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
