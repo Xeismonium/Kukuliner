@@ -3,6 +3,12 @@
     <style name="Base.Theme.Kukuliner" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:windowBackground">@color/dark_gray</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:textColor">@color/bg</item>
+
     </style>
 
     <style name="Theme.Kukuliner.Starting" parent="Base.Theme.Kukuliner">
@@ -10,6 +16,18 @@
         <item name="android:windowBackground">@color/dark_gray</item>
         <!-- Set the theme of the Activity that follows your splash screen. -->
         <item name="postSplashScreenTheme">@style/Base.Theme.Kukuliner</item>
+    </style>
+
+    <style name="Theme.Kukuliner" parent="Base.Theme.Kukuliner" />
+
+    <style name="CustomCardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/bg_card_dark</item>
+        <item name="android:textColor">@color/bg</item>
+    </style>
+
+    <style name="CustomDetailCardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/bg_card_dark</item>
+        <item name="android:textColor">@color/bg</item>
     </style>
 
 </resources>

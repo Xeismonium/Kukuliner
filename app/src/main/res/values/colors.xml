@@ -6,4 +6,5 @@
     <color name="bg_card">#FEFAF6</color>
     <color name="dark_gray">#1E1E1E</color>
     <color name="primary">#FF6969</color>
+    <color name="bg_card_dark">#31363F</color>
 </resources>

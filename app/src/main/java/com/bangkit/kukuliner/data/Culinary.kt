@@ -1,6 +1,6 @@
 package com.bangkit.kukuliner.data
 
-data class Kuliner(
+data class Culinary(
     val id: String,
     val name: String,
     val description: String,

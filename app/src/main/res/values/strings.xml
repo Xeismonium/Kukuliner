@@ -14,4 +14,5 @@
     <string name="estimasi_harga_rp_0">Estimasi Harga: Rp. 0</string>
     <string name="deskripsi_makanan">Deskripsi Makanan</string>
     <string name="back_to_main_menu">Back to Main Menu</string>
+    <string name="mode_gelap">Mode Gelap</string>
 </resources>

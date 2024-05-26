@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.kukuliner.databinding.FoodItemBinding
-import com.bangkit.kukuliner.data.Kuliner
+import com.bangkit.kukuliner.data.Culinary
 import com.bangkit.kukuliner.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
 
-class MainAdapter(private val kulinerList: List<Kuliner>) :
+class MainAdapter(private val kulinerList: List<Culinary>) :
     RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {

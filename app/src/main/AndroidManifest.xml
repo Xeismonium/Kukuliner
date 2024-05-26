@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Kukuliner.Starting"
         tools:targetApi="31">
         <activity
+            android:name=".ui.favorite.FavoriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.welcome.Splash_Screen"
             android:exported="true">
             <intent-filter>
@@ -29,8 +35,7 @@
         <activity
             android:name=".ui.welcome.WelcomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.Kukuliner.Starting">
-        </activity>
+            android:theme="@style/Theme.Kukuliner.Starting" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false"

@@ -3,19 +3,27 @@ package com.bangkit.kukuliner.ui.detail
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
 import com.bangkit.kukuliner.databinding.ActivityDetailBinding
 import com.bangkit.kukuliner.databinding.ActivityMainBinding
+import com.bangkit.kukuliner.factory.ViewModelFactory
 import com.bangkit.kukuliner.ui.main.MainActivity
 import com.bangkit.kukuliner.ui.main.MainAdapter
+import com.bangkit.kukuliner.ui.main.MainViewModel
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
+
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +36,14 @@ class DetailActivity : AppCompatActivity() {
 
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         val name = intent.extras?.getString(MainAdapter.NAME_FOOD).toString()
         val desc = intent.extras?.getString(MainAdapter.DESC_FOOD).toString()

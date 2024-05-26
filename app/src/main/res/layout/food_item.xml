@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
-    style="@style/Widget.Material3.CardView.Elevated"
+    style="@style/CustomCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
+    app:strokeColor= "@color/bg"
+    app:strokeWidth="0dp"
     android:layout_gravity="center">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +45,6 @@
             android:textSize="14sp"
             android:singleLine="true"
             android:text="@string/food_name"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/food_favorite"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/card_image"
@@ -69,7 +70,6 @@
             android:fontFamily="@font/ltsaeada_light"
             android:maxLines="1"
             android:text="@string/estimate_price"
-            android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
