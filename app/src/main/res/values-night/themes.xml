@@ -4,6 +4,7 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
         <item name="android:windowBackground">@color/dark_gray</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

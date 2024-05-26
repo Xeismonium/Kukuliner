@@ -7,13 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.setting.SettingActivity">
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/nightmode"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:text="@string/mode_gelap"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/ltsaeada_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

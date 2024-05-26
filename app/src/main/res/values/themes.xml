@@ -3,6 +3,7 @@
     <style name="Base.Theme.Kukuliner" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
         <item name="android:windowBackground">@color/bg</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

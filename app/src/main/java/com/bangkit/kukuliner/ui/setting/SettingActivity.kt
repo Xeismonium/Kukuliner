@@ -11,19 +11,16 @@ import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
 import com.bangkit.kukuliner.databinding.ActivitySettingBinding
 import com.bangkit.kukuliner.factory.ViewModelFactory
-import com.bangkit.kukuliner.preference.SettingPreferences
-import com.bangkit.kukuliner.preference.dataStore
 
 class SettingActivity : AppCompatActivity() {
 
-    private lateinit var Binding: ActivitySettingBinding
+    private lateinit var binding: ActivitySettingBinding
 
     private val viewModel by viewModels<SettingViewModel> {
         ViewModelFactory.getInstance(this)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_setting)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -31,10 +28,10 @@ class SettingActivity : AppCompatActivity() {
             insets
         }
 
-        Binding = ActivitySettingBinding.inflate(layoutInflater)
-        setContentView(Binding.root)
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val switchTheme = Binding.nightmode
+        val switchTheme = binding.nightmode
 
         viewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
