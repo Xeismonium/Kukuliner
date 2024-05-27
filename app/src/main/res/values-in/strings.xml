@@ -1,3 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Kukuliner</string>
+    <string name="description_1">Kamu bingung cari Kuliner yang Unik?\nTenang ada Kukuline</string>
+    <string name="description_2">Aplikasi penjelajah Kuliner khas daerah Pulau Jawa\\ndi tempat kamu berada</string>
+    <string name="next">Lanjutkan</string>
+    <string name="search_food">Cari Makanan...</string>
+    <string name="favorite">Favorit</string>
+    <string name="settings">Pengaturan</string>
+    <string name="location">Lokasi</string>
+    <string name="food_image">Gambar Makanan</string>
+    <string name="food_name">Nama Makanan</string>
+    <string name="estimate_price">Estimasi Harga</string>
+    <string name="view_on_maps">Lihat di Maps</string>
+    <string name="estimate_price_rp_0">Estimasi Harga: Rp. 0</string>
+    <string name="description_food">Deskripsi Makanan</string>
+    <string name="back_to_main_menu">Kembali ke Menu Utama</string>
+    <string name="dark_mode">Mode Gelap</string>
 </resources>

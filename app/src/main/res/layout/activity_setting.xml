@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/mode_gelap"
+        android:text="@string/dark_mode"
         android:textSize="18sp"
         android:fontFamily="@font/ltsaeada_regular"
         app:layout_constraintEnd_toEndOf="parent"
