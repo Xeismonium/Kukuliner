@@ -14,4 +14,10 @@ class SettingViewModel(private val repository: CulinaryRepository) : ViewModel()
         }
     }
 
+    fun getSkipWelcome() = repository.getSkipWelcome()
+    fun saveSkipWelcome(isSkipWelcome: Boolean) {
+        viewModelScope.launch {
+            repository.saveSkipWelcome(isSkipWelcome)
+        }
+    }
 }

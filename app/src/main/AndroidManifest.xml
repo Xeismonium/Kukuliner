@@ -21,7 +21,7 @@
             android:name=".ui.setting.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.Splash_Screen"
+            android:name=".ui.welcome.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

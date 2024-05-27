@@ -16,6 +16,14 @@ class CulinaryRepository private constructor(
         settingPreference.saveThemeSetting(isDarkModeActive)
     }
 
+    fun getSkipWelcome(): LiveData<Boolean> {
+        return settingPreference.getSkipWelcome().asLiveData()
+    }
+
+    suspend fun saveSkipWelcome(isSkipWelcome: Boolean) {
+        settingPreference.saveSkipWelcome(isSkipWelcome)
+    }
+
     companion object {
         @Volatile
         private var instance: CulinaryRepository? = null

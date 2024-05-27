@@ -19,18 +19,20 @@ class SettingActivity : AppCompatActivity() {
     private val viewModel by viewModels<SettingViewModel> {
         ViewModelFactory.getInstance(this)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        binding = ActivitySettingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        /*
+         * Switch Night Mode
+         */
         val switchTheme = binding.nightmode
 
         viewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
@@ -45,6 +47,23 @@ class SettingActivity : AppCompatActivity() {
 
         switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             viewModel.saveThemeSetting(isChecked)
+        }
+
+        /*
+         * Switch Skip Welcome
+         */
+        val switchSkipWelcome = binding.skipwelcome
+
+        viewModel.getSkipWelcome().observe(this) { isSkipWelcome: Boolean ->
+            if (isSkipWelcome) {
+                switchSkipWelcome.isChecked = true
+            } else {
+                switchSkipWelcome.isChecked = false
+
+                switchSkipWelcome.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+                    viewModel.saveSkipWelcome(isChecked)
+                }
+            }
         }
     }
 }

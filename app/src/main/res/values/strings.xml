@@ -15,4 +15,5 @@
     <string name="description_food">Food Description</string>
     <string name="back_to_main_menu">Back to Main Menu</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="skip_welcome_screen">Skip Welcome Screen</string>
 </resources>

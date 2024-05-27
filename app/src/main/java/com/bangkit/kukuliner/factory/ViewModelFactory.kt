@@ -8,6 +8,7 @@ import com.bangkit.kukuliner.di.Injection
 import com.bangkit.kukuliner.ui.detail.DetailViewModel
 import com.bangkit.kukuliner.ui.main.MainViewModel
 import com.bangkit.kukuliner.ui.setting.SettingViewModel
+import com.bangkit.kukuliner.ui.welcome.SplashScreenViewModel
 
 class ViewModelFactory(private val repository: CulinaryRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -22,6 +23,9 @@ class ViewModelFactory(private val repository: CulinaryRepository) :
             }
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
                 SettingViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SplashScreenViewModel::class.java) -> {
+                SplashScreenViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
