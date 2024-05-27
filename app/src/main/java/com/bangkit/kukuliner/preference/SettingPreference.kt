@@ -13,29 +13,30 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 
 class SettingPreferences private constructor(private val dataStore: DataStore<Preferences>) {
 
-    private val SETTINGS_KEY = booleanPreferencesKey("settings")
+    private val themeKey = booleanPreferencesKey("theme_settings")
+    private val skipKey = booleanPreferencesKey("skip_welcome")
 
     fun getThemeSetting(): Flow<Boolean> {
         return dataStore.data.map { preferences ->
-            preferences[SETTINGS_KEY] ?: false
+            preferences[themeKey] ?: false
         }
     }
 
     suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
         dataStore.edit { preferences ->
-            preferences[SETTINGS_KEY] = isDarkModeActive
+            preferences[themeKey] = isDarkModeActive
         }
     }
 
     fun getSkipWelcome(): Flow<Boolean> {
         return dataStore.data.map { preferences ->
-            preferences[SETTINGS_KEY] ?: false
+            preferences[skipKey] ?: false
         }
     }
 
     suspend fun saveSkipWelcome(isSkipWelcome: Boolean) {
         dataStore.edit { preferences ->
-            preferences[SETTINGS_KEY] = isSkipWelcome
+            preferences[skipKey] = isSkipWelcome
         }
     }
 

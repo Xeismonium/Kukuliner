@@ -59,11 +59,11 @@ class SettingActivity : AppCompatActivity() {
                 switchSkipWelcome.isChecked = true
             } else {
                 switchSkipWelcome.isChecked = false
-
-                switchSkipWelcome.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-                    viewModel.saveSkipWelcome(isChecked)
-                }
             }
+        }
+
+        switchSkipWelcome.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            viewModel.saveSkipWelcome(isChecked)
         }
     }
 }
