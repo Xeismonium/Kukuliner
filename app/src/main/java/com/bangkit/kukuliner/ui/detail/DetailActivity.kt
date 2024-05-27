@@ -56,7 +56,7 @@ class DetailActivity : AppCompatActivity() {
 
         binding.txNameFood.text = name
         binding.txDescFood.text = desc
-        binding.txEstimatePrice.text = "Estimasi Harga: $price"
+        binding.txEstimatePrice.text = getString(R.string.estimate_price_rp, price)
 
         binding.fabBack.setOnClickListener {
             Intent(this, MainActivity::class.java).also {
