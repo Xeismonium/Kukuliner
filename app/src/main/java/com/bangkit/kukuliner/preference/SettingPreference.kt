@@ -16,6 +16,9 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
     private val themeKey = booleanPreferencesKey("theme_settings")
     private val skipKey = booleanPreferencesKey("skip_welcome")
 
+    /*
+     * Dark Mode Setting
+     */
     fun getThemeSetting(): Flow<Boolean> {
         return dataStore.data.map { preferences ->
             preferences[themeKey] ?: false
@@ -28,6 +31,9 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
+    /*
+     * Skip Welcome Settings
+     */
     fun getSkipWelcome(): Flow<Boolean> {
         return dataStore.data.map { preferences ->
             preferences[skipKey] ?: false
