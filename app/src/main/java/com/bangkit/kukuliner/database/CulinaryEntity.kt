@@ -6,12 +6,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-@Entity
+@Entity(tableName = "culinary")
 @Parcelize
-data class Culinary(
-    @PrimaryKey(autoGenerate = true)
+class CulinaryEntity(
     @ColumnInfo(name = "id")
-    var id: Int = 0,
+    @PrimaryKey
+    var id: String,
 
     @ColumnInfo(name = "name")
     var name: String? = null,
@@ -29,5 +29,8 @@ data class Culinary(
     var lat: Double,
 
     @ColumnInfo(name = "lon")
-    var lon: Double
+    var lon: Double,
+
+    @ColumnInfo(name = "isFavorite")
+    var isFavorite: Boolean
 ) : Parcelable
