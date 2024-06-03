@@ -1,6 +1,7 @@
 package com.bangkit.kukuliner.ui.detail
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
+import com.bangkit.kukuliner.database.CulinaryEntity
 import com.bangkit.kukuliner.databinding.ActivityDetailBinding
 import com.bangkit.kukuliner.databinding.ActivityMainBinding
 import com.bangkit.kukuliner.factory.ViewModelFactory
@@ -21,7 +23,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
 
-    private val viewModel by viewModels<MainViewModel> {
+    private val viewModel by viewModels<DetailViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
@@ -43,25 +45,36 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-        val name = intent.extras?.getString(MainAdapter.NAME_FOOD).toString()
-        val desc = intent.extras?.getString(MainAdapter.DESC_FOOD).toString()
-        val photo = intent.extras?.getString(MainAdapter.PHOTO_FOOD).toString()
-        val price = intent.extras?.getString(MainAdapter.PRICE_FOOD).toString()
-        val lat = intent.extras?.getString(MainAdapter.LAT_FOOD).toString()
-        val lon = intent.extras?.getString(MainAdapter.LON_FOOD).toString()
+        val culinary: CulinaryEntity? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("Culinary", CulinaryEntity::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra("Culinary")
+        }
 
         Glide.with(this)
-            .load(photo)
+            .load(culinary?.photoUrl)
             .into(binding.imgPhotoFood)
 
-        binding.txNameFood.text = name
-        binding.txDescFood.text = desc
-        binding.txEstimatePrice.text = getString(R.string.estimate_price_rp, price)
+        binding.txNameFood.text = culinary?.name
+        binding.txDescFood.text = culinary?.description
+        binding.txEstimatePrice.text = getString(R.string.estimate_price_rp, culinary?.estimatePrice)
 
         binding.fabBack.setOnClickListener {
             Intent(this, MainActivity::class.java).also {
                 startActivity(it)
                 finish()
+            }
+        }
+
+        binding.favorite.setImageResource(if (culinary?.isFavorite == false) R.drawable.heart else R.drawable.heart_fill)
+        binding.favorite.setOnClickListener {
+            if (culinary?.isFavorite == true) {
+                viewModel.deleteCulinary(culinary)
+                binding.favorite.setImageResource(R.drawable.heart)
+            } else {
+                viewModel.saveCulinary(culinary as CulinaryEntity)
+                binding.favorite.setImageResource(R.drawable.heart_fill)
             }
         }
     }

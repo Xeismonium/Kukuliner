@@ -1,4 +1,4 @@
-package com.bangkit.kukuliner.ui.detail
+package com.bangkit.kukuliner.ui.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,9 +6,9 @@ import com.bangkit.kukuliner.data.CulinaryRepository
 import com.bangkit.kukuliner.database.CulinaryEntity
 import kotlinx.coroutines.launch
 
-class DetailViewModel(private val repository: CulinaryRepository) : ViewModel() {
+class FavoriteViewModel(private val repository: CulinaryRepository) : ViewModel() {
 
-    fun getThemeSettings() = repository.getThemeSettings()
+    fun getFavoriteCulinary() = repository.getFavoriteCulinary()
 
     fun saveCulinary(culinary: CulinaryEntity) {
         viewModelScope.launch {

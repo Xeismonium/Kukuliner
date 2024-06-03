@@ -1,7 +1,6 @@
 package com.bangkit.kukuliner.ui.main
 
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toolbar
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.bangkit.kukuliner.R
@@ -65,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        val adapter = MainAdapter { culinary ->
+        val culinaryAdapter = MainAdapter { culinary ->
             if (culinary.isFavorite) {
                 viewModel.deleteCulinary(culinary)
             } else {
@@ -74,24 +72,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         getAllCulinary().observe(this) { result ->
-            when (result) {
-                is Result.Loading -> {
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
 
-                }
+                    }
 
-                is Result.Success -> {
-                    adapter.submitList(result.data)
-                }
+                    is Result.Success -> {
+                        culinaryAdapter.submitList(result.data)
+                    }
 
-                is Result.Error -> {
+                    is Result.Error -> {
 
+                    }
                 }
             }
         }
 
         binding.rvFood.apply {
             setHasFixedSize(true)
-            this.adapter = adapter
+            this.adapter = culinaryAdapter
         }
     }
 
@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getAllCulinary(): LiveData<Result<List<CulinaryEntity>>> = liveData {
         emit(Result.Loading)
-        val culinaryDao = CulinaryRoomDatabase.getDatabase(this@MainActivity).culinaryDao()
+        val culinaryDao = CulinaryRoomDatabase.getInstance(this@MainActivity).culinaryDao()
         try {
             val culinary = loadKulinerFromJson()
             val culinaryList = culinary.map {

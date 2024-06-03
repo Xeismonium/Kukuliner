@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.kukuliner.data.CulinaryRepository
 import com.bangkit.kukuliner.di.Injection
 import com.bangkit.kukuliner.ui.detail.DetailViewModel
+import com.bangkit.kukuliner.ui.favorite.FavoriteViewModel
 import com.bangkit.kukuliner.ui.main.MainViewModel
 import com.bangkit.kukuliner.ui.setting.SettingViewModel
 import com.bangkit.kukuliner.ui.welcome.SplashScreenViewModel
@@ -26,6 +27,9 @@ class ViewModelFactory(private val repository: CulinaryRepository) :
             }
             modelClass.isAssignableFrom(SplashScreenViewModel::class.java) -> {
                 SplashScreenViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
+                FavoriteViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

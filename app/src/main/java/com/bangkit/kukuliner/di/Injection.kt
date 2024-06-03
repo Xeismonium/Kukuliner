@@ -9,7 +9,7 @@ import com.bangkit.kukuliner.preference.dataStore
 object Injection {
     fun provideRepository(context: Context): CulinaryRepository {
         val pref = SettingPreferences.getInstance(context.dataStore)
-        val database = CulinaryRoomDatabase.getDatabase(context)
+        val database = CulinaryRoomDatabase.getInstance(context)
         val culinaryDao = database.culinaryDao()
         return CulinaryRepository.getInstance(pref, culinaryDao)
     }

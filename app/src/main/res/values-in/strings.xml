@@ -16,4 +16,5 @@
     <string name="description_food">Deskripsi Makanan</string>
     <string name="back_to_main_menu">Kembali ke Menu Utama</string>
     <string name="dark_mode">Mode Gelap</string>
+    <string name="skip_welcome_screen">Lewati Halaman Pembuka</string>
 </resources>

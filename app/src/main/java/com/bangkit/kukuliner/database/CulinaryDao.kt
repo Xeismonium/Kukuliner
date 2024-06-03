@@ -19,7 +19,7 @@ interface CulinaryDao {
     @Delete
     suspend fun delete(culinary: CulinaryEntity)
 
-    @Query("SELECT * FROM culinary ORDER BY name ASC")
+    @Query("SELECT * FROM culinary")
     fun getCulinary(): LiveData<List<CulinaryEntity>>
 
     @Query("SELECT * FROM culinary WHERE isFavorite = 1")
@@ -28,6 +28,6 @@ interface CulinaryDao {
     @Query("DELETE FROM culinary WHERE isFavorite = 0")
     suspend fun deleteAll()
 
-    @Query("SELECT EXISTS(SELECT * FROM culinary WHERE name = :name AND isFavorite = 1)")
-    suspend fun isFavorite(name: String): Boolean
+    @Query("SELECT EXISTS(SELECT * FROM culinary WHERE id = :id AND isFavorite = 1)")
+    suspend fun isFavorite(id: String): Boolean
 }
