@@ -17,4 +17,11 @@
     <string name="back_to_main_menu">Kembali ke Menu Utama</string>
     <string name="dark_mode">Mode Gelap</string>
     <string name="skip_welcome_screen">Lewati Halaman Pembuka</string>
+    <string name="location_not_found">Lokasi Tidak Ditemukan</string>
+    <string name="location_need_permission">Membutuhkan Izin Lokasi</string>
+    <string name="location_permission_denied">Izin Lokasi Ditolak</string>
+    <string name="location_found">Lokasi Ditemukan</string>
+    <string name="location_error">Gagal Mendapatkan Lokasi: %1$s</string>
+    <string name="location_error_name">Gagal Mendapatkan Nama Lokasi: %1$s</string>
+
 </resources>

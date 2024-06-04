@@ -1,12 +1,21 @@
 package com.bangkit.kukuliner.ui.main
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import android.widget.Toolbar
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.LiveData
@@ -21,10 +30,17 @@ import com.bangkit.kukuliner.data.local.room.CulinaryRoomDatabase
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.favorite.FavoriteActivity
 import com.bangkit.kukuliner.ui.setting.SettingActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.InputStreamReader
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +50,9 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
     }
+
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +65,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        } else {
+            getLocation()
+        }
+
         getThemeSettings()
         initAdapter()
         initSearchBar()
 
     }
+
 
     private fun getThemeSettings() {
         viewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
@@ -170,5 +197,62 @@ class MainActivity : AppCompatActivity() {
         val localData: LiveData<Result<List<CulinaryEntity>>> =
             culinaryDao.getCulinary().map { Result.Success(it) }
         emitSource(localData)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                getLocation()
+            } else {
+                binding.tvLocation.text = getString(R.string.location_permission_denied)
+                Toast.makeText(this, getString(R.string.location_need_permission), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun getLocation() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                location?.let {
+                    getAddressFromLocation(it.latitude, it.longitude)
+                } ?: run {
+                    Toast.makeText(this, getString(R.string.location_not_found), Toast.LENGTH_SHORT).show()
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this, getString(R.string.location_error, exception.message), Toast.LENGTH_LONG).show()
+            }
+        } else {
+            // Meminta izin jika belum diberikan
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE)
+        }
+    }
+
+    private fun getAddressFromLocation(latitude: Double, longitude: Double) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val geocoder = Geocoder(this@MainActivity, Locale.getDefault())
+                val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+                if (!addresses.isNullOrEmpty()) {
+                    val address = addresses[0]
+                    val locationName = address.getAddressLine(0)
+                    withContext(Dispatchers.Main) {
+                        binding.tvLocation.text = locationName
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    binding.tvLocation.text = "Error"
+                    Toast.makeText(this@MainActivity, getString(R.string.location_error_name, e.message), Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 }

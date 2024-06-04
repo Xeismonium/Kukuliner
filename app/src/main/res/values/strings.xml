@@ -16,4 +16,11 @@
     <string name="back_to_main_menu">Back to Main Menu</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="skip_welcome_screen">Skip Welcome Screen</string>
+
+    <string name="location_not_found">Location Not Found</string>
+    <string name="location_error">Failed Get Location: %1$s</string>
+    <string name="location_need_permission">Location Permission Needed</string>
+    <string name="location_permission_denied">Location Permission Denied</string>
+    <string name="location_found">Location Found</string>
+    <string name="location_error_name">Failed Get Location Name: %1$s</string>
 </resources>

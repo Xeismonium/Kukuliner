@@ -48,14 +48,17 @@
 
     <TextView
         android:id="@+id/tv_location"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8sp"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:text="@string/location"
         android:textAppearance="@style/CustomSearchBar"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@id/map_icon"
         app:layout_constraintStart_toEndOf="@id/map_icon"
+        app:layout_constraintEnd_toEndOf="@id/search_bar"
         app:layout_constraintTop_toTopOf="@id/map_icon" />
 
     <androidx.recyclerview.widget.RecyclerView
