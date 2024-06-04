@@ -38,6 +38,7 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.io.InputStreamReader
 import java.util.Locale
@@ -77,7 +78,6 @@ class MainActivity : AppCompatActivity() {
         initSearchBar()
 
     }
-
 
     private fun getThemeSettings() {
         viewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
@@ -216,16 +216,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            viewModel.getLastKnownLocation { location: Location? ->
                 location?.let {
                     getAddressFromLocation(it.latitude, it.longitude)
                 } ?: run {
-                    Toast.makeText(this, getString(R.string.location_not_found), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.location_not_found), Toast.LENGTH_SHORT).show()
                 }
-            }.addOnFailureListener { exception ->
-                Toast.makeText(this, getString(R.string.location_error, exception.message), Toast.LENGTH_LONG).show()
             }
         } else {
             // Meminta izin jika belum diberikan
@@ -249,7 +246,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    binding.tvLocation.text = "Error"
+                    binding.tvLocation.text = getString(R.string.location_error_name, e.message)
                     Toast.makeText(this@MainActivity, getString(R.string.location_error_name, e.message), Toast.LENGTH_LONG).show()
                 }
             }

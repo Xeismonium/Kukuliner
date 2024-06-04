@@ -1,15 +1,28 @@
 package com.bangkit.kukuliner.data
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import com.bangkit.kukuliner.preference.SettingPreferences
 import androidx.lifecycle.asLiveData
 import com.bangkit.kukuliner.data.local.room.CulinaryDao
 import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.tasks.await
 
 class CulinaryRepository private constructor(
     private val settingPreference: SettingPreferences,
     private val culinaryDao: CulinaryDao,
+    context: Context
 ) {
+
+    private val appContext = context.applicationContext
+    private val fusedLocationClient: FusedLocationProviderClient =
+        LocationServices.getFusedLocationProviderClient(context.applicationContext)
 
     fun getThemeSettings(): LiveData<Boolean> {
         return settingPreference.getThemeSetting().asLiveData()
@@ -40,15 +53,30 @@ class CulinaryRepository private constructor(
         culinaryDao.update(culinary)
     }
 
+    suspend fun getLastKnownLocation(): Location? {
+        return try {
+            if (ContextCompat.checkSelfPermission(appContext, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+                fusedLocationClient.lastLocation.await()
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
     companion object {
         @Volatile
         private var instance: CulinaryRepository? = null
         fun getInstance(
             settingPreference: SettingPreferences,
-            culinaryDao: CulinaryDao
+            culinaryDao: CulinaryDao,
+            context: Context
         ): CulinaryRepository =
             instance ?: synchronized(this) {
-                instance ?: CulinaryRepository(settingPreference, culinaryDao)
+                instance ?: CulinaryRepository(settingPreference, culinaryDao, context)
             }.also { instance = it }
     }
 }
