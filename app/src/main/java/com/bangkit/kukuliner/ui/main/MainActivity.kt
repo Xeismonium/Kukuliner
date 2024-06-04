@@ -16,9 +16,9 @@ import com.bangkit.kukuliner.R
 import com.bangkit.kukuliner.databinding.ActivityMainBinding
 import com.bangkit.kukuliner.data.Culinary
 import com.bangkit.kukuliner.data.Result
-import com.bangkit.kukuliner.database.CulinaryEntity
-import com.bangkit.kukuliner.database.CulinaryRoomDatabase
-import com.bangkit.kukuliner.factory.ViewModelFactory
+import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
+import com.bangkit.kukuliner.data.local.room.CulinaryRoomDatabase
+import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.favorite.FavoriteActivity
 import com.bangkit.kukuliner.ui.setting.SettingActivity
 import com.google.gson.Gson

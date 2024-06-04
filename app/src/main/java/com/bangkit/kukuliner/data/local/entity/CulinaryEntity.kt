@@ -1,4 +1,4 @@
-package com.bangkit.kukuliner.database
+package com.bangkit.kukuliner.data.local.entity
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

@@ -2,7 +2,6 @@ package com.bangkit.kukuliner.ui.setting
 
 import android.os.Bundle
 import android.widget.CompoundButton
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,7 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
 import com.bangkit.kukuliner.databinding.ActivitySettingBinding
-import com.bangkit.kukuliner.factory.ViewModelFactory
+import com.bangkit.kukuliner.ui.ViewModelFactory
 
 class SettingActivity : AppCompatActivity() {
 

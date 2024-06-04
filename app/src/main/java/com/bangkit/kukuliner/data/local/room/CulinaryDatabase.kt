@@ -1,9 +1,10 @@
-package com.bangkit.kukuliner.database
+package com.bangkit.kukuliner.data.local.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
 
 @Database(entities = [CulinaryEntity::class], version = 1, exportSchema = false)
 abstract class CulinaryRoomDatabase : RoomDatabase() {

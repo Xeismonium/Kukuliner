@@ -3,7 +3,7 @@ package com.bangkit.kukuliner.ui.favorite
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.kukuliner.data.CulinaryRepository
-import com.bangkit.kukuliner.database.CulinaryEntity
+import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
 import kotlinx.coroutines.launch
 
 class FavoriteViewModel(private val repository: CulinaryRepository) : ViewModel() {

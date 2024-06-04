@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
-import com.bangkit.kukuliner.factory.ViewModelFactory
+import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.main.MainActivity
 
 @SuppressLint("CustomSplashScreen")

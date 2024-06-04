@@ -52,8 +52,8 @@
 
         <ImageView
             android:id="@+id/food_favorite"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/heart"
             app:layout_constraintRight_toRightOf="@id/card_image"
             app:layout_constraintTop_toTopOf="@id/food_name"

@@ -3,7 +3,7 @@ package com.bangkit.kukuliner.ui.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.kukuliner.data.CulinaryRepository
-import com.bangkit.kukuliner.database.CulinaryEntity
+import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val repository: CulinaryRepository) : ViewModel() {

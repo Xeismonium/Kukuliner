@@ -1,19 +1,10 @@
 package com.bangkit.kukuliner.data
 
-import android.content.Context
-import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import com.bangkit.kukuliner.preference.SettingPreferences
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.map
-import com.bangkit.kukuliner.R
-import com.bangkit.kukuliner.database.CulinaryDao
-import com.bangkit.kukuliner.database.CulinaryEntity
-import com.google.gson.Gson
-import com.google.gson.JsonParser
-import com.google.gson.reflect.TypeToken
-import java.io.InputStreamReader
+import com.bangkit.kukuliner.data.local.room.CulinaryDao
+import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
 
 class CulinaryRepository private constructor(
     private val settingPreference: SettingPreferences,

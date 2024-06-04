@@ -1,4 +1,4 @@
-package com.bangkit.kukuliner.factory
+package com.bangkit.kukuliner.ui
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

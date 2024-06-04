@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.kukuliner.R
-import com.bangkit.kukuliner.database.CulinaryEntity
+import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
 import com.bangkit.kukuliner.databinding.FoodItemBinding
 import com.bangkit.kukuliner.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
