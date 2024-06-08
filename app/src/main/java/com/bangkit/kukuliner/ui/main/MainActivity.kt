@@ -7,6 +7,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import android.widget.Toolbar
@@ -92,29 +93,50 @@ class MainActivity : AppCompatActivity() {
     private fun initAdapter() {
         val culinaryAdapter = MainAdapter { culinary ->
             if (culinary.isFavorite) {
-                viewModel.deleteCulinary(culinary)
+//                viewModel.deleteCulinary(culinary)
             } else {
-                viewModel.saveCulinary(culinary)
+//                viewModel.saveCulinary(culinary)
             }
         }
 
-        getAllCulinary().observe(this) { result ->
-            if (result != null) {
-                when (result) {
-                    is Result.Loading -> {
+        viewModel.getCulinary().observe(this){
+            when (it) {
+                is Result.Loading -> {
+                }
 
-                    }
+                is Result.Success -> {
+//                    culinaryAdapter.submitList(it.data)
+                    Log.e("CEK DATA", it.data.toString())
+                }
 
-                    is Result.Success -> {
-                        culinaryAdapter.submitList(result.data)
-                    }
-
-                    is Result.Error -> {
-
-                    }
+                is Result.Error -> {
+                    Log.e("CEK ERROR", "${it.error}")
+                    Toast.makeText(
+                        this,
+                        "Gagal ambil data ${it.error} ",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
+
+//        getAllCulinary().observe(this) { result ->
+//            if (result != null) {
+//                when (result) {
+//                    is Result.Loading -> {
+//
+//                    }
+//
+//                    is Result.Success -> {
+//                        culinaryAdapter.submitList(result.data)
+//                    }
+//
+//                    is Result.Error -> {
+//
+//                    }
+//                }
+//            }
+//        }
 
         binding.rvFood.apply {
             setHasFixedSize(true)
@@ -162,42 +184,33 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadKulinerFromJson(): List<Culinary> {
-        val inputStream = resources.openRawResource(R.raw.kukuliner)
-        val reader = InputStreamReader(inputStream)
-        val jsonElement = JsonParser.parseReader(reader)
-        val jsonObject = jsonElement.asJsonObject
-        val listKulinerJson = jsonObject.getAsJsonArray("listKuliner")
-        val type = object : TypeToken<List<Culinary>>() {}.type
-        return Gson().fromJson(listKulinerJson, type)
-    }
 
-    private fun getAllCulinary(): LiveData<Result<List<CulinaryEntity>>> = liveData {
-        emit(Result.Loading)
-        val culinaryDao = CulinaryRoomDatabase.getInstance(this@MainActivity).culinaryDao()
-        try {
-            val culinary = loadKulinerFromJson()
-            val culinaryList = culinary.map {
-                val isFavorited = culinaryDao.isFavorite(it.id)
-                CulinaryEntity(
-                    it.id,
-                    it.name,
-                    it.description,
-                    it.photoUrl,
-                    it.estimatePrice,
-                    it.lat,
-                    it.lon,
-                    isFavorited)
-            }
-            culinaryDao.deleteAll()
-            culinaryDao.insert(culinaryList)
-        } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
-        }
-        val localData: LiveData<Result<List<CulinaryEntity>>> =
-            culinaryDao.getCulinary().map { Result.Success(it) }
-        emitSource(localData)
-    }
+//    private fun getAllCulinary(): LiveData<Result<List<CulinaryEntity>>> = liveData {
+//        emit(Result.Loading)
+//        val culinaryDao = CulinaryRoomDatabase.getInstance(this@MainActivity).culinaryDao()
+//        try {
+//            val culinary = loadKulinerFromJson()
+//            val culinaryList = culinary.map {
+//                val isFavorited = culinaryDao.isFavorite(it.id)
+//                CulinaryEntity(
+//                    it.id,
+//                    it.name,
+//                    it.description,
+//                    it.photoUrl,
+//                    it.estimatePrice,
+//                    it.lat,
+//                    it.lon,
+//                    isFavorited)
+//            }
+//            culinaryDao.deleteAll()
+//            culinaryDao.insert(culinaryList)
+//        } catch (e: Exception) {
+//            emit(Result.Error(e.message.toString()))
+//        }
+//        val localData: LiveData<Result<List<CulinaryEntity>>> =
+//            culinaryDao.getCulinary().map { Result.Success(it) }
+//        emitSource(localData)
+//    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
