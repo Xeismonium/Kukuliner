@@ -3,20 +3,17 @@ package com.bangkit.kukuliner.ui.detail
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
-import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
+import com.bangkit.kukuliner.data.response.CulinaryResponseItem
 import com.bangkit.kukuliner.databinding.ActivityDetailBinding
-import com.bangkit.kukuliner.helper.haversineDistance
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.main.MainActivity
 import com.bumptech.glide.Glide
-import java.util.Locale
 
 class DetailActivity : AppCompatActivity() {
 
@@ -44,8 +41,8 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-        val culinary: CulinaryEntity? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("Culinary", CulinaryEntity::class.java)
+        val culinary: CulinaryResponseItem? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("Culinary", CulinaryResponseItem::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra("Culinary")
@@ -66,25 +63,15 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-        binding.favorite.setImageResource(if (culinary?.isFavorite == false) R.drawable.heart else R.drawable.heart_fill)
-        binding.favorite.setOnClickListener {
-            if (culinary?.isFavorite == true) {
-                viewModel.deleteCulinary(culinary)
-                binding.favorite.setImageResource(R.drawable.heart)
-            } else {
-                viewModel.saveCulinary(culinary as CulinaryEntity)
-                binding.favorite.setImageResource(R.drawable.heart_fill)
-            }
-        }
-
-        viewModel.getLastKnownLocation { location ->
-            if (culinary != null) {
-                if (location != null) {
-                    val distance: Double = haversineDistance(location.latitude, location.longitude, culinary.lat, culinary.lon)
-                    val formattedDistance: String = String.format(Locale("id", "ID"),"%.2f", distance)
-                    Toast.makeText(this, "Jarak: $formattedDistance KM", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+        binding.favorite.setImageResource(R.drawable.heart)
+//        binding.favorite.setOnClickListener {
+//            if (culinary?.isFavorite == true) {
+////                viewModel.deleteCulinary(culinary)
+//                binding.favorite.setImageResource(R.drawable.heart)
+//            } else {
+//                viewModel.saveCulinary(culinary as CulinaryResponseItem)
+//                binding.favorite.setImageResource(R.drawable.heart_fill)
+//            }
+//        }
     }
 }

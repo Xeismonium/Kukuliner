@@ -52,12 +52,12 @@
 
         <ImageView
             android:id="@+id/food_favorite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:src="@drawable/heart"
+            app:layout_constraintBottom_toBottomOf="@id/food_name"
             app:layout_constraintRight_toRightOf="@id/card_image"
-            app:layout_constraintTop_toTopOf="@id/food_name"
-            app:layout_constraintBottom_toBottomOf="@id/food_name"/>
+            app:layout_constraintTop_toTopOf="@id/food_name" />
 
         <TextView
             android:id="@+id/food_price"

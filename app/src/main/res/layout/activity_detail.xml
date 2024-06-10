@@ -10,7 +10,9 @@
     <ImageView
         android:id="@+id/imgPhotoFood"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
+        android:transitionName="image"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +48,7 @@
                 android:fontFamily="@font/ltsaeada_regular"
                 android:text="@string/food_name"
                 android:textSize="26sp"
+                android:transitionName="name"
                 app:layout_constraintEnd_toStartOf="@+id/favorite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -75,6 +78,7 @@
                 android:fontFamily="@font/ltsaeada_regular"
                 android:text="@string/estimate_price_rp"
                 android:textSize="16sp"
+                android:transitionName="price"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txDescFood" />
@@ -100,6 +104,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:transitionName="favorite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/heart" />

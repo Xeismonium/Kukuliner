@@ -9,6 +9,8 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import android.widget.Toolbar
 import androidx.activity.result.contract.ActivityResultContracts
@@ -91,26 +93,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        val culinaryAdapter = MainAdapter { culinary ->
-            if (culinary.isFavorite) {
-//                viewModel.deleteCulinary(culinary)
-            } else {
-//                viewModel.saveCulinary(culinary)
-            }
-        }
+        val culinaryAdapter = MainAdapter {}
 
         viewModel.getCulinary().observe(this){
             when (it) {
                 is Result.Loading -> {
+                    binding.progressBar.visibility = VISIBLE
                 }
 
                 is Result.Success -> {
-//                    culinaryAdapter.submitList(it.data)
-                    Log.e("CEK DATA", it.data.toString())
+                    binding.progressBar.visibility = GONE
+                    culinaryAdapter.submitList(it.data)
                 }
 
                 is Result.Error -> {
-                    Log.e("CEK ERROR", "${it.error}")
                     Toast.makeText(
                         this,
                         "Gagal ambil data ${it.error} ",
@@ -119,24 +115,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-//        getAllCulinary().observe(this) { result ->
-//            if (result != null) {
-//                when (result) {
-//                    is Result.Loading -> {
-//
-//                    }
-//
-//                    is Result.Success -> {
-//                        culinaryAdapter.submitList(result.data)
-//                    }
-//
-//                    is Result.Error -> {
-//
-//                    }
-//                }
-//            }
-//        }
 
         binding.rvFood.apply {
             setHasFixedSize(true)
@@ -184,34 +162,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-//    private fun getAllCulinary(): LiveData<Result<List<CulinaryEntity>>> = liveData {
-//        emit(Result.Loading)
-//        val culinaryDao = CulinaryRoomDatabase.getInstance(this@MainActivity).culinaryDao()
-//        try {
-//            val culinary = loadKulinerFromJson()
-//            val culinaryList = culinary.map {
-//                val isFavorited = culinaryDao.isFavorite(it.id)
-//                CulinaryEntity(
-//                    it.id,
-//                    it.name,
-//                    it.description,
-//                    it.photoUrl,
-//                    it.estimatePrice,
-//                    it.lat,
-//                    it.lon,
-//                    isFavorited)
-//            }
-//            culinaryDao.deleteAll()
-//            culinaryDao.insert(culinaryList)
-//        } catch (e: Exception) {
-//            emit(Result.Error(e.message.toString()))
-//        }
-//        val localData: LiveData<Result<List<CulinaryEntity>>> =
-//            culinaryDao.getCulinary().map { Result.Success(it) }
-//        emitSource(localData)
-//    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -238,7 +188,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         } else {
-            // Meminta izin jika belum diberikan
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE)

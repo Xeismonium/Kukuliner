@@ -48,7 +48,7 @@ class CulinaryRepository private constructor(
         emit(Result.Loading)
         try {
             val response = apiService.getCulinary()
-            emit(Result.Success(response.culinaryResponse))
+            emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error("${e.message}"))
         }

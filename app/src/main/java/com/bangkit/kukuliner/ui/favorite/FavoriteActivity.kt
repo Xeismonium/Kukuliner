@@ -29,21 +29,21 @@ class FavoriteActivity : AppCompatActivity() {
             insets
         }
 
-        val culinaryAdapter = MainAdapter { culinary ->
-            if (culinary.isFavorite) {
-                viewModel.deleteCulinary(culinary)
-            } else {
-                viewModel.saveCulinary(culinary)
-            }
-        }
+//        val culinaryAdapter = MainAdapter { culinary ->
+//            if (culinary.isFavorite) {
+//                viewModel.deleteCulinary(culinary)
+//            } else {
+//                viewModel.saveCulinary(culinary)
+//            }
+//        }
 
-        viewModel.getFavoriteCulinary().observe(this) { favoriteCulinary ->
-            culinaryAdapter.submitList(favoriteCulinary)
-        }
-
-        binding.rvFood.apply {
-            setHasFixedSize(true)
-            adapter = culinaryAdapter
-        }
+//        viewModel.getFavoriteCulinary().observe(this) { favoriteCulinary ->
+//            culinaryAdapter.submitList(favoriteCulinary)
+//        }
+//
+//        binding.rvFood.apply {
+//            setHasFixedSize(true)
+//            adapter = culinaryAdapter
+//        }
     }
 }
