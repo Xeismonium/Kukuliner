@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.animation.AnimationUtils
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -29,6 +30,15 @@ class WelcomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Load animation
+        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+
+        // Apply animation to views
+        binding.logo.startAnimation(fadeInAnimation)
+        binding.descriptionBold.startAnimation(fadeInAnimation)
+        binding.descriptionReguler.startAnimation(fadeInAnimation)
+        binding.buttonNext.startAnimation(fadeInAnimation)
 
         binding.buttonNext.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))

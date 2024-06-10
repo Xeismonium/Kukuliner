@@ -3,7 +3,6 @@ package com.bangkit.kukuliner.ui.detail
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -12,11 +11,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
 import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
 import com.bangkit.kukuliner.databinding.ActivityDetailBinding
-import com.bangkit.kukuliner.helper.haversineDistance
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.main.MainActivity
 import com.bumptech.glide.Glide
-import java.util.Locale
 
 class DetailActivity : AppCompatActivity() {
 
@@ -74,16 +71,6 @@ class DetailActivity : AppCompatActivity() {
             } else {
                 viewModel.saveCulinary(culinary as CulinaryEntity)
                 binding.favorite.setImageResource(R.drawable.heart_fill)
-            }
-        }
-
-        viewModel.getLastKnownLocation { location ->
-            if (culinary != null) {
-                if (location != null) {
-                    val distance: Double = haversineDistance(location.latitude, location.longitude, culinary.lat, culinary.lon)
-                    val formattedDistance: String = String.format(Locale("id", "ID"),"%.2f", distance)
-                    Toast.makeText(this, "Jarak: $formattedDistance KM", Toast.LENGTH_SHORT).show()
-                }
             }
         }
     }

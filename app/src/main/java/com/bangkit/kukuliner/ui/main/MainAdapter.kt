@@ -1,9 +1,11 @@
 package com.bangkit.kukuliner.ui.main
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,6 +15,7 @@ import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
 import com.bangkit.kukuliner.databinding.FoodItemBinding
 import com.bangkit.kukuliner.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
+import androidx.core.util.Pair
 
 class MainAdapter(private val onFavoriteClick: (CulinaryEntity) -> Unit) :
     ListAdapter<CulinaryEntity, MainAdapter.MainViewHolder>(DIFF_CALLBACK) {
@@ -58,7 +61,15 @@ class MainAdapter(private val onFavoriteClick: (CulinaryEntity) -> Unit) :
             itemView.setOnClickListener {
                 val intentDetailFood = Intent(itemView.context, DetailActivity::class.java)
                 intentDetailFood.putExtra("Culinary", culinary)
-                itemView.context.startActivity(intentDetailFood)
+
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        itemView.context as Activity,
+                        Pair(binding.foodImage, "image"),
+                        Pair(binding.foodFavorite, "favorite"),
+                    )
+
+                itemView.context.startActivity(intentDetailFood, optionsCompat.toBundle())
             }
         }
     }

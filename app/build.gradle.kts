@@ -79,4 +79,8 @@ dependencies {
 
     // Location
     implementation(libs.play.services.location)
+
+    // TensorFlow Lite
+    implementation(libs.play.services.tflite.java)
+    implementation(libs.play.services.tflite.gpu)
 }
