@@ -49,8 +49,7 @@ class CulinaryRepository private constructor(
         emit(Result.Loading)
         try {
             val response = apiService.getCulinary()
-            val culinaries = response
-            val culinaryList = culinaries.map { culinary ->
+            val culinaryList = response.map { culinary ->
                 val isFavorite = culinaryDao.isFavorite(culinary.id)
                 CulinaryResponseItem(
                     culinary.id,
@@ -73,6 +72,10 @@ class CulinaryRepository private constructor(
         val localData: LiveData<Result<List<CulinaryResponseItem>>> =
             culinaryDao.getCulinary().map { Result.Success(it) }
         emitSource(localData)
+    }
+
+    fun searchCulinary(query: String): LiveData<List<CulinaryResponseItem>> {
+        return culinaryDao.searchCulinary(query)
     }
 
     fun getFavoriteCulinary(): LiveData<List<CulinaryResponseItem>> {

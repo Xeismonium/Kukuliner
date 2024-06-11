@@ -3,25 +3,20 @@ package com.bangkit.kukuliner.ui.main
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.kukuliner.R
+import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 import com.bangkit.kukuliner.databinding.FoodItemBinding
 import com.bangkit.kukuliner.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
-import androidx.core.util.Pair
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import com.bangkit.kukuliner.R
-import com.bangkit.kukuliner.data.local.room.CulinaryDao
-import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainAdapter(private val onFavoriteClick: (CulinaryResponseItem) -> Unit) :
     ListAdapter<CulinaryResponseItem, MainAdapter.MainViewHolder>(DIFF_CALLBACK) {
@@ -52,6 +47,7 @@ class MainAdapter(private val onFavoriteClick: (CulinaryResponseItem) -> Unit) :
             )
         }
         ivFavorite.setOnClickListener {
+            Log.d("Adapter", "Favorite Clicked")
             onFavoriteClick(culinary)
             notifyItemChanged(position)
         }
@@ -84,12 +80,18 @@ class MainAdapter(private val onFavoriteClick: (CulinaryResponseItem) -> Unit) :
     companion object {
         val DIFF_CALLBACK: DiffUtil.ItemCallback<CulinaryResponseItem> =
             object : DiffUtil.ItemCallback<CulinaryResponseItem>() {
-                override fun areItemsTheSame(oldItem: CulinaryResponseItem, newItem: CulinaryResponseItem): Boolean {
+                override fun areItemsTheSame(
+                    oldItem: CulinaryResponseItem,
+                    newItem: CulinaryResponseItem
+                ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 @SuppressLint("DiffUtilEquals")
-                override fun areContentsTheSame(oldItem: CulinaryResponseItem, newItem: CulinaryResponseItem): Boolean {
+                override fun areContentsTheSame(
+                    oldItem: CulinaryResponseItem,
+                    newItem: CulinaryResponseItem
+                ): Boolean {
                     return oldItem == newItem
                 }
             }

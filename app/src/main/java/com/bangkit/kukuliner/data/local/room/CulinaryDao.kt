@@ -23,6 +23,9 @@ interface CulinaryDao {
     @Query("SELECT * FROM culinary")
     fun getCulinary(): LiveData<List<CulinaryResponseItem>>
 
+    @Query("SELECT * FROM culinary WHERE name LIKE '%' || :query || '%'")
+    fun searchCulinary(query: String): LiveData<List<CulinaryResponseItem>>
+
     @Query("SELECT * FROM culinary WHERE isFavorite = 1")
     fun getFavoriteCulinary(): LiveData<List<CulinaryResponseItem>>
 

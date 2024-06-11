@@ -19,8 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
-import com.bangkit.kukuliner.databinding.ActivityMainBinding
 import com.bangkit.kukuliner.data.Result
+import com.bangkit.kukuliner.databinding.ActivityMainBinding
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.favorite.FavoriteActivity
 import com.bangkit.kukuliner.ui.setting.SettingActivity
@@ -31,7 +31,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,8 +55,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
         } else {
             getLocation()
         }
@@ -81,13 +88,13 @@ class MainActivity : AppCompatActivity() {
     private fun initAdapter() {
         val culinaryAdapter = MainAdapter { culinary ->
             if (culinary.isFavorite) {
-                viewModel.saveCulinary(culinary)
-            } else {
                 viewModel.deleteCulinary(culinary)
+            } else {
+                viewModel.saveCulinary(culinary)
             }
         }
 
-        viewModel.getCulinary().observe(this){result ->
+        viewModel.getCulinary().observe(this) { result ->
             if (result != null) {
                 when (result) {
                     is Result.Loading -> {
@@ -96,10 +103,12 @@ class MainActivity : AppCompatActivity() {
 
                     is Result.Success -> {
                         binding.progressBar.visibility = GONE
-                        culinaryAdapter.submitList(result.data)
+                        val culinaryData = result.data
+                        culinaryAdapter.submitList(culinaryData)
                     }
 
                     is Result.Error -> {
+                        binding.progressBar.visibility = GONE
                         Toast.makeText(
                             this,
                             "Gagal ambil data ${result.error} ",
@@ -166,24 +175,38 @@ class MainActivity : AppCompatActivity() {
                 getLocation()
             } else {
                 binding.tvLocation.text = getString(R.string.location_permission_denied)
-                Toast.makeText(this, getString(R.string.location_need_permission), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.location_need_permission),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 
     private fun getLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             viewModel.getLastKnownLocation { location: Location? ->
                 location?.let {
                     getAddressFromLocation(it.latitude, it.longitude)
                 } ?: run {
-                    Toast.makeText(this@MainActivity, getString(R.string.location_not_found), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.location_not_found),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         } else {
-            ActivityCompat.requestPermissions(this,
+            ActivityCompat.requestPermissions(
+                this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE)
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
         }
     }
 
@@ -202,7 +225,11 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     binding.tvLocation.text = getString(R.string.location_error_name, e.message)
-                    Toast.makeText(this@MainActivity, getString(R.string.location_error_name, e.message), Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.location_error_name, e.message),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
