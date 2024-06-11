@@ -10,12 +10,18 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bangkit.kukuliner.R
 import com.bangkit.kukuliner.databinding.FoodItemBinding
 import com.bangkit.kukuliner.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
 import androidx.core.util.Pair
-import com.bangkit.kukuliner.data.response.CulinaryResponseItem
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import com.bangkit.kukuliner.R
+import com.bangkit.kukuliner.data.local.room.CulinaryDao
+import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainAdapter(private val onFavoriteClick: (CulinaryResponseItem) -> Unit) :
     ListAdapter<CulinaryResponseItem, MainAdapter.MainViewHolder>(DIFF_CALLBACK) {
@@ -29,25 +35,26 @@ class MainAdapter(private val onFavoriteClick: (CulinaryResponseItem) -> Unit) :
         val culinary = getItem(position)
         holder.bind(culinary)
 
-//        val ivFavorite = holder.binding.foodFavorite
-//        if (culinary.isFavorite) {
-//            ivFavorite.setImageDrawable(
-//                ContextCompat.getDrawable(
-//                    ivFavorite.context,
-//                    R.drawable.heart_fill
-//                )
-//            )
-//        } else {
-//            ivFavorite.setImageDrawable(
-//                ContextCompat.getDrawable(
-//                    ivFavorite.context,
-//                    R.drawable.heart
-//                )
-//            )
-//        }
-//        ivFavorite.setOnClickListener {
-//            onFavoriteClick(culinary)
-//        }
+        val ivFavorite = holder.binding.foodFavorite
+        if (culinary.isFavorite) {
+            ivFavorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    ivFavorite.context,
+                    R.drawable.heart_fill
+                )
+            )
+        } else {
+            ivFavorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    ivFavorite.context,
+                    R.drawable.heart
+                )
+            )
+        }
+        ivFavorite.setOnClickListener {
+            onFavoriteClick(culinary)
+            notifyItemChanged(position)
+        }
     }
 
     class MainViewHolder(val binding: FoodItemBinding) : RecyclerView.ViewHolder(binding.root) {

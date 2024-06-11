@@ -1,8 +1,6 @@
-package com.bangkit.kukuliner.data.api
+package com.bangkit.kukuliner.data.remote.api
 
-import com.bangkit.kukuliner.data.response.CulinaryResponse
-import com.bangkit.kukuliner.data.response.CulinaryResponseItem
-import retrofit2.Call
+import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 import retrofit2.http.GET
 
 interface ApiService {

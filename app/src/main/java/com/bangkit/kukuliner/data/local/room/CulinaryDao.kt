@@ -7,24 +7,24 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
+import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 
 @Dao
 interface CulinaryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(culinary: List<CulinaryEntity>)
+    suspend fun insert(culinary: List<CulinaryResponseItem>)
 
     @Update
-    suspend fun update(culinary: CulinaryEntity)
+    suspend fun update(culinary: CulinaryResponseItem)
 
     @Delete
-    suspend fun delete(culinary: CulinaryEntity)
+    suspend fun delete(culinary: CulinaryResponseItem)
 
     @Query("SELECT * FROM culinary")
-    fun getCulinary(): LiveData<List<CulinaryEntity>>
+    fun getCulinary(): LiveData<List<CulinaryResponseItem>>
 
     @Query("SELECT * FROM culinary WHERE isFavorite = 1")
-    fun getFavoriteCulinary(): LiveData<List<CulinaryEntity>>
+    fun getFavoriteCulinary(): LiveData<List<CulinaryResponseItem>>
 
     @Query("DELETE FROM culinary WHERE isFavorite = 0")
     suspend fun deleteAll()

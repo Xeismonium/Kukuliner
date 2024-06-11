@@ -4,7 +4,7 @@ import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.kukuliner.data.CulinaryRepository
-import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
+import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,17 +15,17 @@ class MainViewModel(private val repository: CulinaryRepository) : ViewModel() {
 
     fun getCulinary() = repository.getCulinary()
 
-//    fun saveCulinary(culinary: CulinaryEntity) {
-//        viewModelScope.launch {
-//            repository.setFavoriteCulinary(culinary, true)
-//        }
-//    }
-//
-//    fun deleteCulinary(culinary: CulinaryEntity) {
-//        viewModelScope.launch {
-//            repository.setFavoriteCulinary(culinary, false)
-//        }
-//    }
+    fun saveCulinary(culinary: CulinaryResponseItem) {
+        viewModelScope.launch {
+            repository.setFavoriteCulinary(culinary, true)
+        }
+    }
+
+    fun deleteCulinary(culinary: CulinaryResponseItem) {
+        viewModelScope.launch {
+            repository.setFavoriteCulinary(culinary, false)
+        }
+    }
 
     fun getLastKnownLocation(onLocationRetrieved: (Location?) -> Unit) {
         viewModelScope.launch {

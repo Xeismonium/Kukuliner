@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
+import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 
-@Database(entities = [CulinaryEntity::class], version = 1, exportSchema = false)
+@Database(entities = [CulinaryResponseItem::class], version = 1, exportSchema = false)
 abstract class CulinaryRoomDatabase : RoomDatabase() {
     abstract fun culinaryDao(): CulinaryDao
 

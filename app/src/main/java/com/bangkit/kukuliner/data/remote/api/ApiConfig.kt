@@ -1,4 +1,4 @@
-package com.bangkit.kukuliner.data.api
+package com.bangkit.kukuliner.data.remote.api
 
 import com.bangkit.kukuliner.BuildConfig
 import okhttp3.OkHttpClient

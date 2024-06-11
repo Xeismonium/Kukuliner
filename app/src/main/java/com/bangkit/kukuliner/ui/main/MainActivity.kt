@@ -5,15 +5,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import android.widget.Toolbar
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -21,29 +18,18 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.map
 import com.bangkit.kukuliner.R
 import com.bangkit.kukuliner.databinding.ActivityMainBinding
-import com.bangkit.kukuliner.data.Culinary
 import com.bangkit.kukuliner.data.Result
-import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
-import com.bangkit.kukuliner.data.local.room.CulinaryRoomDatabase
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.favorite.FavoriteActivity
 import com.bangkit.kukuliner.ui.setting.SettingActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.gson.Gson
-import com.google.gson.JsonParser
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.io.InputStreamReader
 import java.util.Locale
 
 
@@ -93,29 +79,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        val culinaryAdapter = MainAdapter {}
-
-        viewModel.getCulinary().observe(this){
-            when (it) {
-                is Result.Loading -> {
-                    binding.progressBar.visibility = VISIBLE
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = GONE
-                    culinaryAdapter.submitList(it.data)
-                }
-
-                is Result.Error -> {
-                    Toast.makeText(
-                        this,
-                        "Gagal ambil data ${it.error} ",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+        val culinaryAdapter = MainAdapter { culinary ->
+            if (culinary.isFavorite) {
+                viewModel.saveCulinary(culinary)
+            } else {
+                viewModel.deleteCulinary(culinary)
             }
         }
 
+        viewModel.getCulinary().observe(this){result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        binding.progressBar.visibility = VISIBLE
+                    }
+
+                    is Result.Success -> {
+                        binding.progressBar.visibility = GONE
+                        culinaryAdapter.submitList(result.data)
+                    }
+
+                    is Result.Error -> {
+                        Toast.makeText(
+                            this,
+                            "Gagal ambil data ${result.error} ",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
         binding.rvFood.apply {
             setHasFixedSize(true)
             this.adapter = culinaryAdapter

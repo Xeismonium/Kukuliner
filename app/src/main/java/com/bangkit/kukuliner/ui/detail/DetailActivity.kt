@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
-import com.bangkit.kukuliner.data.response.CulinaryResponseItem
+import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 import com.bangkit.kukuliner.databinding.ActivityDetailBinding
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.main.MainActivity
@@ -63,15 +63,15 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-        binding.favorite.setImageResource(R.drawable.heart)
-//        binding.favorite.setOnClickListener {
-//            if (culinary?.isFavorite == true) {
-////                viewModel.deleteCulinary(culinary)
-//                binding.favorite.setImageResource(R.drawable.heart)
-//            } else {
-//                viewModel.saveCulinary(culinary as CulinaryResponseItem)
-//                binding.favorite.setImageResource(R.drawable.heart_fill)
-//            }
-//        }
+        binding.favorite.setImageResource(if (culinary?.isFavorite == false) R.drawable.heart else R.drawable.heart_fill)
+        binding.favorite.setOnClickListener {
+            if (culinary?.isFavorite == true) {
+                viewModel.deleteCulinary(culinary)
+                binding.favorite.setImageResource(R.drawable.heart)
+            } else {
+                viewModel.saveCulinary(culinary as CulinaryResponseItem)
+                binding.favorite.setImageResource(R.drawable.heart_fill)
+            }
+        }
     }
 }
