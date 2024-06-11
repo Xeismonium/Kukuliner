@@ -8,8 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import com.bangkit.kukuliner.preference.SettingPreferences
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
+import com.bangkit.kukuliner.data.api.ApiService
 import com.bangkit.kukuliner.data.local.room.CulinaryDao
 import com.bangkit.kukuliner.data.local.entity.CulinaryEntity
+import com.bangkit.kukuliner.data.response.CulinaryResponseItem
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.tasks.await
@@ -17,7 +20,8 @@ import kotlinx.coroutines.tasks.await
 class CulinaryRepository private constructor(
     private val settingPreference: SettingPreferences,
     private val culinaryDao: CulinaryDao,
-    context: Context
+    context: Context,
+    private val apiService: ApiService,
 ) {
 
     private val appContext = context.applicationContext
@@ -40,8 +44,14 @@ class CulinaryRepository private constructor(
         settingPreference.saveSkipWelcome(isSkipWelcome)
     }
 
-    fun getCulinary(): LiveData<List<CulinaryEntity>> {
-        return culinaryDao.getCulinary()
+    fun getCulinary(): LiveData<Result<List<CulinaryResponseItem>>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getCulinary()
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("${e.message}"))
+        }
     }
 
     fun getFavoriteCulinary(): LiveData<List<CulinaryEntity>> {
@@ -73,10 +83,11 @@ class CulinaryRepository private constructor(
         fun getInstance(
             settingPreference: SettingPreferences,
             culinaryDao: CulinaryDao,
-            context: Context
+            context: Context,
+            apiService: ApiService,
         ): CulinaryRepository =
             instance ?: synchronized(this) {
-                instance ?: CulinaryRepository(settingPreference, culinaryDao, context)
+                instance ?: CulinaryRepository(settingPreference, culinaryDao, context, apiService)
             }.also { instance = it }
     }
 }

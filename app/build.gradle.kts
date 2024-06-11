@@ -17,6 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BaseURL", "\"https://capstone-kukuliner.vercel.app/api/\"")
     }
 
     buildTypes {
@@ -37,6 +38,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -63,6 +65,7 @@ dependencies {
     // Lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.1")
 
     // Datastore
     implementation(libs.androidx.datastore.preferences)
@@ -80,7 +83,10 @@ dependencies {
     // Location
     implementation(libs.play.services.location)
 
-    // TensorFlow Lite
-    implementation(libs.play.services.tflite.java)
-    implementation(libs.play.services.tflite.gpu)
+    // API
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
+
 }

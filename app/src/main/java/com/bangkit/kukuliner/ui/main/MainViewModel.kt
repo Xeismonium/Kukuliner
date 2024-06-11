@@ -13,17 +13,19 @@ class MainViewModel(private val repository: CulinaryRepository) : ViewModel() {
 
     fun getThemeSettings() = repository.getThemeSettings()
 
-    fun saveCulinary(culinary: CulinaryEntity) {
-        viewModelScope.launch {
-            repository.setFavoriteCulinary(culinary, true)
-        }
-    }
+    fun getCulinary() = repository.getCulinary()
 
-    fun deleteCulinary(culinary: CulinaryEntity) {
-        viewModelScope.launch {
-            repository.setFavoriteCulinary(culinary, false)
-        }
-    }
+//    fun saveCulinary(culinary: CulinaryEntity) {
+//        viewModelScope.launch {
+//            repository.setFavoriteCulinary(culinary, true)
+//        }
+//    }
+//
+//    fun deleteCulinary(culinary: CulinaryEntity) {
+//        viewModelScope.launch {
+//            repository.setFavoriteCulinary(culinary, false)
+//        }
+//    }
 
     fun getLastKnownLocation(onLocationRetrieved: (Location?) -> Unit) {
         viewModelScope.launch {
