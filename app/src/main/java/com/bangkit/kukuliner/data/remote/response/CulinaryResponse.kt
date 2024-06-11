@@ -4,12 +4,11 @@ import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-@Parcelize
-data class CulinaryResponse(
 
+data class CulinaryResponse(
 	@field:SerializedName("CulinaryResponse")
 	val culinaryResponse: List<CulinaryResponseItem>
-) : Parcelable
+)
 
 @Parcelize
 data class CulinaryResponseItem(
