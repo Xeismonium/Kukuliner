@@ -1,11 +1,13 @@
 package com.bangkit.kukuliner.ui.favorite
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
+import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 import com.bangkit.kukuliner.databinding.ActivityFavoriteBinding
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.main.MainAdapter
@@ -38,12 +40,38 @@ class FavoriteActivity : AppCompatActivity() {
         }
 
         viewModel.getFavoriteCulinary().observe(this) { favoriteCulinary ->
+            if (binding.searchView.text.isEmpty())
             culinaryAdapter.submitList(favoriteCulinary)
+            updateEmptyView(favoriteCulinary)
+        }
+
+        viewModel.searchFavoriteCulinary(binding.searchView.text.toString()).observe(this) { favoriteCulinary ->
+            if (binding.searchView.text.isNotEmpty())
+            culinaryAdapter.submitList(favoriteCulinary)
+            updateEmptyView(favoriteCulinary)
         }
 
         binding.rvFood.apply {
             setHasFixedSize(true)
             adapter = culinaryAdapter
+        }
+
+        binding.searchView.setupWithSearchBar(binding.searchBar)
+        binding.searchView.editText.setOnEditorActionListener { _, _, _ ->
+            viewModel.searchFavoriteCulinary(binding.searchView.text.toString()).observe(this) { favoriteCulinary ->
+                culinaryAdapter.submitList(favoriteCulinary)
+            }
+            binding.searchBar.setText(binding.searchView.text)
+            binding.searchView.hide()
+            true
+        }
+    }
+
+    private fun updateEmptyView(data: List<CulinaryResponseItem>) {
+        if (data.isEmpty()) {
+            binding.noData.visibility = View.VISIBLE
+        } else {
+            binding.noData.visibility = View.GONE
         }
     }
 }

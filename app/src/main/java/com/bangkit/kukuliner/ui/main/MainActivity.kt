@@ -20,6 +20,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
 import com.bangkit.kukuliner.data.Result
+import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 import com.bangkit.kukuliner.databinding.ActivityMainBinding
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.favorite.FavoriteActivity
@@ -105,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                         binding.progressBar.visibility = GONE
                         val culinaryData = result.data
                         culinaryAdapter.submitList(culinaryData)
+                        updateEmptyView(culinaryData)
                     }
 
                     is Result.Error -> {
@@ -163,6 +165,14 @@ class MainActivity : AppCompatActivity() {
             })
         }
     }
+
+    private fun updateEmptyView(data: List<CulinaryResponseItem>) {
+        binding.noData.visibility = if (data.isEmpty()) VISIBLE else GONE
+    }
+
+    /*
+     * Location
+     */
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

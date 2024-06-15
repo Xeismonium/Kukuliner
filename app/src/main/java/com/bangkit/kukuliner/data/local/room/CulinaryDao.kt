@@ -29,6 +29,9 @@ interface CulinaryDao {
     @Query("SELECT * FROM culinary WHERE isFavorite = 1")
     fun getFavoriteCulinary(): LiveData<List<CulinaryResponseItem>>
 
+    @Query("SELECT * FROM culinary WHERE isFavorite = 1 AND name LIKE '%' || :query || '%'")
+    fun searchFavoriteCulinary(query: String): LiveData<List<CulinaryResponseItem>>
+
     @Query("DELETE FROM culinary WHERE isFavorite = 0")
     suspend fun deleteAll()
 

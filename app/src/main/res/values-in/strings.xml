@@ -4,7 +4,7 @@
     <string name="description_1">Kamu bingung cari Kuliner yang Unik?\nTenang ada Kukuline</string>
     <string name="description_2">Aplikasi penjelajah Kuliner khas daerah Pulau Jawa\\ndi tempat kamu berada</string>
     <string name="next">Lanjutkan</string>
-    <string name="search_food">Cari Makanan...</string>
+    <string name="search_food">Cari Makanan…</string>
     <string name="favorite">Favorit</string>
     <string name="settings">Pengaturan</string>
     <string name="location">Lokasi</string>
@@ -23,5 +23,6 @@
     <string name="location_found">Lokasi Ditemukan</string>
     <string name="location_error">Gagal Mendapatkan Lokasi: %1$s</string>
     <string name="location_error_name">Gagal Mendapatkan Nama Lokasi: %1$s</string>
+    <string name="no_data_found">Data Tidak Ditemukan</string>
 
 </resources>

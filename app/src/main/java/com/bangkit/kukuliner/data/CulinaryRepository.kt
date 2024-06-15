@@ -82,6 +82,10 @@ class CulinaryRepository private constructor(
         return culinaryDao.getFavoriteCulinary()
     }
 
+    fun searchFavoriteCulinary(query: String): LiveData<List<CulinaryResponseItem>> {
+        return culinaryDao.searchFavoriteCulinary(query)
+    }
+
     suspend fun setFavoriteCulinary(culinary: CulinaryResponseItem, newState: Boolean) {
         culinary.isFavorite = newState
         culinaryDao.update(culinary)
