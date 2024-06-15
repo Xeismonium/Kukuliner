@@ -40,16 +40,19 @@ class FavoriteActivity : AppCompatActivity() {
         }
 
         viewModel.getFavoriteCulinary().observe(this) { favoriteCulinary ->
-            if (binding.searchView.text.isEmpty())
-            culinaryAdapter.submitList(favoriteCulinary)
-            updateEmptyView(favoriteCulinary)
+            if (binding.searchView.text.isEmpty()) {
+                culinaryAdapter.submitList(favoriteCulinary)
+                updateEmptyView(favoriteCulinary)
+            }
         }
 
-        viewModel.searchFavoriteCulinary(binding.searchView.text.toString()).observe(this) { favoriteCulinary ->
-            if (binding.searchView.text.isNotEmpty())
-            culinaryAdapter.submitList(favoriteCulinary)
-            updateEmptyView(favoriteCulinary)
-        }
+        viewModel.searchFavoriteCulinary(binding.searchView.text.toString())
+            .observe(this) { favoriteCulinary ->
+                if (binding.searchView.text.isNotEmpty()) {
+                    culinaryAdapter.submitList(favoriteCulinary)
+                    updateEmptyView(favoriteCulinary)
+                }
+            }
 
         binding.rvFood.apply {
             setHasFixedSize(true)
@@ -58,9 +61,10 @@ class FavoriteActivity : AppCompatActivity() {
 
         binding.searchView.setupWithSearchBar(binding.searchBar)
         binding.searchView.editText.setOnEditorActionListener { _, _, _ ->
-            viewModel.searchFavoriteCulinary(binding.searchView.text.toString()).observe(this) { favoriteCulinary ->
-                culinaryAdapter.submitList(favoriteCulinary)
-            }
+            viewModel.searchFavoriteCulinary(binding.searchView.text.toString())
+                .observe(this) { favoriteCulinary ->
+                    culinaryAdapter.submitList(favoriteCulinary)
+                }
             binding.searchBar.setText(binding.searchView.text)
             binding.searchView.hide()
             true
