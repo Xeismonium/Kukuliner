@@ -14,7 +14,9 @@ class MainViewModel(private val repository: CulinaryRepository) : ViewModel() {
 
     fun getThemeSettings() = repository.getThemeSettings()
 
-    fun getCulinary() = repository.getCulinary()
+    fun getAllCulinary() = repository.getAllCulinary()
+
+    fun searchCulinary(query: String) = repository.searchCulinary(query)
 
     fun saveCulinary(culinary: CulinaryResponseItem) {
         viewModelScope.launch {

@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    private lateinit var culinaryAdapter: MainAdapter
+
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -76,6 +78,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /*
+     * Theme
+     */
+
     private fun getThemeSettings() {
         viewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
@@ -86,8 +92,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*
+     * Init Adapter
+     */
+
     private fun initAdapter() {
-        val culinaryAdapter = MainAdapter { culinary ->
+        culinaryAdapter = MainAdapter { culinary ->
             if (culinary.isFavorite) {
                 viewModel.deleteCulinary(culinary)
             } else {
@@ -95,36 +105,62 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.getCulinary().observe(this) { result ->
-            if (result != null) {
-                when (result) {
-                    is Result.Loading -> {
-                        binding.progressBar.visibility = VISIBLE
-                    }
-
-                    is Result.Success -> {
-                        binding.progressBar.visibility = GONE
-                        val culinaryData = result.data
-                        culinaryAdapter.submitList(culinaryData)
-                        updateEmptyView(culinaryData)
-                    }
-
-                    is Result.Error -> {
-                        binding.progressBar.visibility = GONE
-                        Toast.makeText(
-                            this,
-                            "Gagal ambil data ${result.error} ",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-        }
         binding.rvFood.apply {
             setHasFixedSize(true)
             this.adapter = culinaryAdapter
         }
+
+        performSearchOrFetchAll()
     }
+
+    private fun performSearchOrFetchAll() {
+        val query = binding.searchView.text.toString()
+        if (query.isEmpty()) {
+            fetchAllCulinary()
+        } else {
+            searchCulinary(query)
+        }
+    }
+
+    private fun fetchAllCulinary() {
+        viewModel.getAllCulinary().observe(this) { result ->
+            handleResult(result)
+        }
+    }
+
+    private fun searchCulinary(query: String) {
+        viewModel.searchCulinary(query).observe(this@MainActivity) { result ->
+            handleResult(result)
+        }
+    }
+
+    private fun handleResult(result: Result<List<CulinaryResponseItem>>) {
+        when (result) {
+            is Result.Loading -> {
+                binding.progressBar.visibility = VISIBLE
+            }
+
+            is Result.Success -> {
+                binding.progressBar.visibility = GONE
+                val culinaryData = result.data
+                culinaryAdapter.submitList(culinaryData)
+                updateEmptyView(culinaryData)
+            }
+
+            is Result.Error -> {
+                binding.progressBar.visibility = GONE
+                Toast.makeText(
+                    this,
+                    "Gagal ambil data ${result.error} ",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    /*
+     * Search
+     */
 
     private fun initSearchBar() {
         with(binding) {
@@ -132,10 +168,11 @@ class MainActivity : AppCompatActivity() {
 
             searchView
                 .editText
-                .setOnEditorActionListener { textView, actionId, event ->
+                .setOnEditorActionListener { _, _, _ ->
                     searchBar.setText(searchView.text)
                     searchView.hide()
-                    false
+                    performSearchOrFetchAll()
+                    true
                 }
 
             searchBar.setOnMenuItemClickListener(object : MenuItem.OnMenuItemClickListener,

@@ -9,8 +9,8 @@ import com.google.gson.annotations.SerializedName
 
 
 data class CulinaryResponse(
-	@field:SerializedName("CulinaryResponse")
-	val culinaryResponse: List<CulinaryResponseItem>
+	@field:SerializedName("listKuliner")
+	val listKuliner: List<CulinaryResponseItem>
 )
 
 @Entity(tableName = "culinary")

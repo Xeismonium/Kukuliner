@@ -11,12 +11,6 @@ import kotlinx.coroutines.launch
 
 class FavoriteViewModel(private val repository: CulinaryRepository) : ViewModel() {
 
-    private val _favorite = MutableStateFlow<List<CulinaryResponseItem>>(emptyList())
-    val favorites: StateFlow<List<CulinaryResponseItem>> = _favorite
-
-    private val _searchResults = MutableStateFlow<List<CulinaryResponseItem>>(emptyList())
-    val searchResults: StateFlow<List<CulinaryResponseItem>> = _searchResults
-
     init {
         getFavoriteCulinary()
     }
