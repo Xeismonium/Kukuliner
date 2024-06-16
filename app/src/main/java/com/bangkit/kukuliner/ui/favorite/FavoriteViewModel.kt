@@ -11,10 +11,6 @@ import kotlinx.coroutines.launch
 
 class FavoriteViewModel(private val repository: CulinaryRepository) : ViewModel() {
 
-    init {
-        getFavoriteCulinary()
-    }
-
     fun getFavoriteCulinary() = repository.getFavoriteCulinary()
 
     fun searchFavoriteCulinary(query: String) = repository.searchFavoriteCulinary(query)

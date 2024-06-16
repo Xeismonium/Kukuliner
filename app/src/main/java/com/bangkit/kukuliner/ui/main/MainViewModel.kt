@@ -18,6 +18,8 @@ class MainViewModel(private val repository: CulinaryRepository) : ViewModel() {
 
     fun searchCulinary(query: String) = repository.searchCulinary(query)
 
+    fun getRecommendationsCulinary(lat: Double, lon: Double) = repository.getRecommendationsCulinary(lat, lon)
+
     fun saveCulinary(culinary: CulinaryResponseItem) {
         viewModelScope.launch {
             repository.setFavoriteCulinary(culinary, true)

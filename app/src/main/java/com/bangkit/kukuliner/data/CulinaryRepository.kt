@@ -71,6 +71,7 @@ class CulinaryRepository private constructor(
         }
         val localData: LiveData<Result<List<CulinaryResponseItem>>> =
             culinaryDao.getCulinary().map { Result.Success(it) }
+        Log.d("CulinaryRepository", "getAllCulinary: Success")
         emitSource(localData)
     }
 
@@ -94,6 +95,7 @@ class CulinaryRepository private constructor(
             }
             culinaryDao.deleteAll()
             culinaryDao.insert(culinaryList)
+            Log.d("CulinaryRepository", "searchCulinary: $listKuliner")
         } catch (e: Exception) {
             Log.e("CulinaryRepository", "searchCulinary: ${e.message.toString()} ")
             emit(Result.Error("${e.message}"))
@@ -101,8 +103,46 @@ class CulinaryRepository private constructor(
         val localData: LiveData<Result<List<CulinaryResponseItem>>> =
             culinaryDao.searchCulinary(query).map { results ->
                 val filteredResults = results.filter { it.name.contains(query, ignoreCase = true) || it.isFavorite }
+                Log.d("CulinaryRepository", "searchCulinary Filtered: $filteredResults")
                 Result.Success(filteredResults)
             }
+        Log.d("CulinaryRepository", "searchCulinary: Success")
+        emitSource(localData)
+    }
+
+    fun getRecommendationsCulinary(lat: Double, lon: Double): LiveData<Result<List<CulinaryResponseItem>>> = liveData {
+        emit(Result.Loading)
+        var recommendedIds = emptySet<String>()
+        try {
+            val response = apiService.getRecommendationsCulinary(lat, lon)
+            val listKuliner = response.listKuliner
+            recommendedIds = listKuliner.map { it.id }.toSet()
+            val culinaryList = listKuliner.map { culinary ->
+                val isFavorite = culinaryDao.isFavorite(culinary.id)
+                CulinaryResponseItem(
+                    culinary.id,
+                    culinary.name,
+                    culinary.description,
+                    culinary.photoUrl,
+                    culinary.estimatePrice,
+                    culinary.lat,
+                    culinary.lon,
+                    isFavorite
+                )
+            }
+            culinaryDao.deleteAll()
+            culinaryDao.insert(culinaryList)
+        } catch (e: Exception) {
+            Log.e("CulinaryRepository", "getRecommendationsCulinary: ${e.message.toString()} ")
+            emit(Result.Error("${e.message}"))
+        }
+        val localData: LiveData<Result<List<CulinaryResponseItem>>> =
+            culinaryDao.getCulinary().map { results ->
+                val filteredResults = results.filter { it.isFavorite || it.id in recommendedIds }
+                Log.d("CulinaryRepository", "getRecommendationsCulinary: $filteredResults")
+                Result.Success(filteredResults)
+            }
+        Log.d("CulinaryRepository", "getRecommendationsCulinary: Success")
         emitSource(localData)
     }
 

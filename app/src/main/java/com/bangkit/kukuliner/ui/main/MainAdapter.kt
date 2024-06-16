@@ -47,7 +47,6 @@ class MainAdapter(private val onFavoriteClick: (CulinaryResponseItem) -> Unit) :
             )
         }
         ivFavorite.setOnClickListener {
-            Log.d("Adapter", "Favorite Clicked")
             onFavoriteClick(culinary)
             notifyItemChanged(position)
         }
@@ -97,4 +96,3 @@ class MainAdapter(private val onFavoriteClick: (CulinaryResponseItem) -> Unit) :
             }
     }
 }
-

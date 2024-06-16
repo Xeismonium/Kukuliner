@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -42,7 +43,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var culinaryAdapter: MainAdapter
-
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         getThemeSettings()
         initAdapter()
         initSearchBar()
-
     }
 
     /*
@@ -103,57 +102,67 @@ class MainActivity : AppCompatActivity() {
             } else {
                 viewModel.saveCulinary(culinary)
             }
+            Log.d("MainAdapter", "Adapter Defined")
         }
 
         binding.rvFood.apply {
             setHasFixedSize(true)
             this.adapter = culinaryAdapter
+            Log.d("MainAdapter", "Applying Adapter")
         }
 
-        performSearchOrFetchAll()
+        performFetchBasedOnState()
     }
 
-    private fun performSearchOrFetchAll() {
+    private fun performFetchBasedOnState() {
         val query = binding.searchView.text.toString()
         if (query.isEmpty()) {
-            fetchAllCulinary()
+            viewModel.getLastKnownLocation { location: Location? ->
+                if (location == null) {
+                    fetchAllCulinary()
+                } else {
+                    getRecommendationsCulinary(location.latitude, location.longitude)
+                }
+            }
         } else {
             searchCulinary(query)
         }
+        Log.d("MainAdapter", "Fetching Data")
     }
 
     private fun fetchAllCulinary() {
-        viewModel.getAllCulinary().observe(this) { result ->
+        viewModel.getAllCulinary().observe(this@MainActivity) { result ->
             handleResult(result)
         }
+        Log.d("MainAdapter", "Fetching All Data")
     }
 
     private fun searchCulinary(query: String) {
         viewModel.searchCulinary(query).observe(this@MainActivity) { result ->
             handleResult(result)
         }
+        Log.d("MainAdapter", "Searching Data")
+    }
+
+    private fun getRecommendationsCulinary(lat: Double, lon: Double) {
+        viewModel.getRecommendationsCulinary(lat, lon).observe(this@MainActivity) { result ->
+            handleResult(result)
+        }
+        Log.d("MainAdapter", "Getting Recommendations Data")
     }
 
     private fun handleResult(result: Result<List<CulinaryResponseItem>>) {
         when (result) {
-            is Result.Loading -> {
-                binding.progressBar.visibility = VISIBLE
-            }
-
+            is Result.Loading -> binding.progressBar.visibility = VISIBLE
             is Result.Success -> {
                 binding.progressBar.visibility = GONE
                 val culinaryData = result.data
                 culinaryAdapter.submitList(culinaryData)
                 updateEmptyView(culinaryData)
             }
-
             is Result.Error -> {
                 binding.progressBar.visibility = GONE
-                Toast.makeText(
-                    this,
-                    "Gagal ambil data ${result.error} ",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, "Gagal ambil data ${result.error} ", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -166,14 +175,13 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
 
-            searchView
-                .editText
-                .setOnEditorActionListener { _, _, _ ->
-                    searchBar.setText(searchView.text)
-                    searchView.hide()
-                    performSearchOrFetchAll()
-                    true
-                }
+            searchView.editText.setOnEditorActionListener { v, actionId, event ->
+                searchBar.setText(searchView.text)
+                searchView.hide()
+                performFetchBasedOnState()
+                Log.d("MainAdapter", "Search View Listener")
+                false
+            }
 
             searchBar.setOnMenuItemClickListener(object : MenuItem.OnMenuItemClickListener,
                 Toolbar.OnMenuItemClickListener,
@@ -181,22 +189,16 @@ class MainActivity : AppCompatActivity() {
                 override fun onMenuItemClick(item: MenuItem): Boolean {
                     return when (item.itemId) {
                         R.id.favorite -> {
-                            val favoriteIntent =
-                                Intent(this@MainActivity, FavoriteActivity::class.java)
+                            val favoriteIntent = Intent(this@MainActivity, FavoriteActivity::class.java)
                             startActivity(favoriteIntent)
                             true
                         }
-
                         R.id.settings -> {
-                            val favoriteIntent =
-                                Intent(this@MainActivity, SettingActivity::class.java)
-                            startActivity(favoriteIntent)
+                            val settingsIntent = Intent(this@MainActivity, SettingActivity::class.java)
+                            startActivity(settingsIntent)
                             true
                         }
-
-                        else -> {
-                            false
-                        }
+                        else -> false
                     }
                 }
             })
@@ -222,11 +224,7 @@ class MainActivity : AppCompatActivity() {
                 getLocation()
             } else {
                 binding.tvLocation.text = getString(R.string.location_permission_denied)
-                Toast.makeText(
-                    this,
-                    getString(R.string.location_need_permission),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, getString(R.string.location_need_permission), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -241,11 +239,7 @@ class MainActivity : AppCompatActivity() {
                 location?.let {
                     getAddressFromLocation(it.latitude, it.longitude)
                 } ?: run {
-                    Toast.makeText(
-                        this@MainActivity,
-                        getString(R.string.location_not_found),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.location_not_found), Toast.LENGTH_SHORT).show()
                 }
             }
         } else {
