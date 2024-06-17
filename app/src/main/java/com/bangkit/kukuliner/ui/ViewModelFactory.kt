@@ -8,6 +8,7 @@ import com.bangkit.kukuliner.di.Injection
 import com.bangkit.kukuliner.ui.detail.DetailViewModel
 import com.bangkit.kukuliner.ui.favorite.FavoriteViewModel
 import com.bangkit.kukuliner.ui.main.MainViewModel
+import com.bangkit.kukuliner.ui.resultscan.ResultScanViewModel
 import com.bangkit.kukuliner.ui.setting.SettingViewModel
 import com.bangkit.kukuliner.ui.welcome.SplashScreenViewModel
 
@@ -30,6 +31,9 @@ class ViewModelFactory(private val repository: CulinaryRepository) :
             }
             modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
                 FavoriteViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ResultScanViewModel::class.java) -> {
+                ResultScanViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
