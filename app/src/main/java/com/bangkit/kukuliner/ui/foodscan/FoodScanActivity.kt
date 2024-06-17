@@ -20,6 +20,7 @@ import com.bangkit.kukuliner.R
 import com.bangkit.kukuliner.databinding.ActivityFoodScanBinding
 import com.bangkit.kukuliner.helper.ImageClassifierHelper
 import com.bangkit.kukuliner.ui.foodscan.CameraActivity.Companion.CAMERAX_RESULT
+import com.bangkit.kukuliner.ui.resultscan.ResultScanActivity
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
 class FoodScanActivity : AppCompatActivity() {
@@ -120,18 +121,31 @@ class FoodScanActivity : AppCompatActivity() {
                     results?.let {
                         val result = it[0]
                         val label = result.categories[0].label
+                        val score = result.categories[0].score
+
+                        fun Float.formatToString(): String {
+                            return String.format("%.2f%%", this * 100)
+                        }
+
                         label_image = label
+                        score_image = score.formatToString()
                     }
                 }
             }
         )
 
         imageClassifierHelper.classifyStaticImage(currentImageUri)
-        binding.txresultscan.text = label_image
+        val intent = Intent(this, ResultScanActivity::class.java)
+        intent.putExtra(IMAGE_CLASS, currentImageUri.toString())
+        intent.putExtra(LABEL, label_image)
+        intent.putExtra(SCORE, score_image)
+        startActivity(intent)
     }
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        const val IMAGE_CLASS = "IMAGE_CLASS"
         const val LABEL = "LABEL"
+        const val SCORE = "SCORE"
     }
 }

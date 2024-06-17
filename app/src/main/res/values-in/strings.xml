@@ -24,5 +24,6 @@
     <string name="location_error">Gagal Mendapatkan Lokasi: %1$s</string>
     <string name="location_error_name">Gagal Mendapatkan Nama Lokasi: %1$s</string>
     <string name="no_data_found">Data Tidak Ditemukan</string>
+    <string name="similiar_food">Similiar Food</string>
 
 </resources>

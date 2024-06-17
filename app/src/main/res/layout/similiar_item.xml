@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    style="@style/CustomCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:strokeColor= "@color/bg"
+    app:strokeWidth="0dp"
+    android:layout_gravity="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/food_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/food_image"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/preview" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/food_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/ltsaeada_regular"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/food_name"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/card_image"
+            app:layout_constraintTop_toBottomOf="@id/card_image" />
+
+        <TextView
+            android:id="@+id/food_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/ltsaeada_light"
+            android:maxLines="1"
+            android:text="@string/estimate_price"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/food_name"
+            app:layout_constraintTop_toBottomOf="@id/food_name"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
