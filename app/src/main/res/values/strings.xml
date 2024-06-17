@@ -30,4 +30,5 @@
     <string name="gambar_kosong" translatable="false">Gambar Kosong</string>
     <string name="nama_makanan" translatable="false">Nama Makanan</string>
     <string name="similiar_food">Similiar Food</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
