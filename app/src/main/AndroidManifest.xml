@@ -35,14 +35,10 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA2tV8iz2kmSrPykKELZHioI38eZ6ORr78" />
+            android:value="${API_KEY}" />
 
         <activity
             android:name=".ui.maps.MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
-        <activity
-            android:name=".ui.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
