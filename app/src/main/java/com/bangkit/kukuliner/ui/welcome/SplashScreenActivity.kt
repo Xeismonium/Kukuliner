@@ -8,6 +8,7 @@ import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkit.kukuliner.R
@@ -32,7 +33,7 @@ class SplashScreenActivity : AppCompatActivity() {
         }
 
         Handler(Looper.getMainLooper()).postDelayed({
-            viewModel.getSkipWelcome().observe(this) { isSkipWelcome: Boolean->
+            viewModel.getSkipWelcome().observe(this) { isSkipWelcome: Boolean ->
                 if (isSkipWelcome) {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -43,6 +44,15 @@ class SplashScreenActivity : AppCompatActivity() {
                     finish()
                 }
             }
+
+            viewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+                if (isDarkModeActive) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
+
         }, 1500)
     }
 }

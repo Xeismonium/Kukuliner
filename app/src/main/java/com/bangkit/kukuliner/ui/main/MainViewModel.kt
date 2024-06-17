@@ -12,8 +12,6 @@ import kotlinx.coroutines.withContext
 
 class MainViewModel(private val repository: CulinaryRepository) : ViewModel() {
 
-    fun getThemeSettings() = repository.getThemeSettings()
-
     fun getAllCulinary() = repository.getAllCulinary()
 
     fun searchCulinary(query: String) = repository.searchCulinary(query)

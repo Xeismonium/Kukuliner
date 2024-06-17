@@ -73,24 +73,9 @@ class MainActivity : AppCompatActivity() {
             getLocation()
         }
 
-        getThemeSettings()
         initAdapter()
         initSearchBar()
         initFoodScan()
-    }
-
-    /*
-     * Theme
-     */
-
-    private fun getThemeSettings() {
-        viewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
-            if (isDarkModeActive) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-        }
     }
 
     /*
@@ -98,19 +83,18 @@ class MainActivity : AppCompatActivity() {
      */
 
     private fun initAdapter() {
+
         culinaryAdapter = MainAdapter { culinary ->
             if (culinary.isFavorite) {
                 viewModel.deleteCulinary(culinary)
             } else {
                 viewModel.saveCulinary(culinary)
             }
-            Log.d("MainAdapter", "Adapter Defined")
         }
 
         binding.rvFood.apply {
             setHasFixedSize(true)
             this.adapter = culinaryAdapter
-            Log.d("MainAdapter", "Applying Adapter")
         }
 
         performFetchBasedOnState()
@@ -129,28 +113,24 @@ class MainActivity : AppCompatActivity() {
         } else {
             searchCulinary(query)
         }
-        Log.d("MainAdapter", "Fetching Data")
     }
 
     private fun fetchAllCulinary() {
         viewModel.getAllCulinary().observe(this@MainActivity) { result ->
             handleResult(result)
         }
-        Log.d("MainAdapter", "Fetching All Data")
     }
 
     private fun searchCulinary(query: String) {
         viewModel.searchCulinary(query).observe(this@MainActivity) { result ->
             handleResult(result)
         }
-        Log.d("MainAdapter", "Searching Data")
     }
 
     private fun getRecommendationsCulinary(lat: Double, lon: Double) {
         viewModel.getRecommendationsCulinary(lat, lon).observe(this@MainActivity) { result ->
             handleResult(result)
         }
-        Log.d("MainAdapter", "Getting Recommendations Data")
     }
 
     private fun handleResult(result: Result<List<CulinaryResponseItem>>) {
@@ -181,7 +161,6 @@ class MainActivity : AppCompatActivity() {
                 searchBar.setText(searchView.text)
                 searchView.hide()
                 performFetchBasedOnState()
-                Log.d("MainAdapter", "Search View Listener")
                 false
             }
 
