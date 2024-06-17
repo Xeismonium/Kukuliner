@@ -25,6 +25,7 @@ import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 import com.bangkit.kukuliner.databinding.ActivityMainBinding
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.favorite.FavoriteActivity
+import com.bangkit.kukuliner.ui.foodscan.FoodScanActivity
 import com.bangkit.kukuliner.ui.setting.SettingActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         getThemeSettings()
         initAdapter()
         initSearchBar()
+        initFoodScan()
     }
 
     /*
@@ -273,6 +275,13 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+        }
+    }
+
+    private fun initFoodScan() {
+        binding.fabScanfood.setOnClickListener {
+            val intent = Intent(this, FoodScanActivity::class.java)
+            startActivity(intent)
         }
     }
 }
