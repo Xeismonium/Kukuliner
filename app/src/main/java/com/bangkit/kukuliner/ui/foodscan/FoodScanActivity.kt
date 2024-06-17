@@ -57,6 +57,10 @@ class FoodScanActivity : AppCompatActivity() {
         allPermissionsGranted()
         setupAction()
 
+        binding.fabBack.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun setupAction() {

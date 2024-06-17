@@ -13,7 +13,10 @@ import com.bangkit.kukuliner.data.remote.response.CulinaryResponseItem
 import com.bangkit.kukuliner.databinding.ActivityDetailBinding
 import com.bangkit.kukuliner.ui.ViewModelFactory
 import com.bangkit.kukuliner.ui.main.MainActivity
+import com.bangkit.kukuliner.ui.maps.MapsActivity
 import com.bumptech.glide.Glide
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLngBounds
 
 class DetailActivity : AppCompatActivity() {
 
@@ -72,6 +75,12 @@ class DetailActivity : AppCompatActivity() {
                 viewModel.saveCulinary(culinary as CulinaryResponseItem)
                 binding.favorite.setImageResource(R.drawable.heart_fill)
             }
+        }
+
+        binding.btnMaps.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra("Culinary", culinary)
+            startActivity(intent)
         }
     }
 }

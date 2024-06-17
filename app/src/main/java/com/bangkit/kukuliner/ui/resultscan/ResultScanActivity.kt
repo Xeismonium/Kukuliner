@@ -45,6 +45,10 @@ class ResultScanActivity : AppCompatActivity() {
         binding.txPredict.text = "Akurasi: ${intent.extras?.getString(FoodScanActivity.SCORE).toString()}"
 
         initAdapter(label)
+
+        binding.fabBack.setOnClickListener {
+            finish()
+        }
     }
 
 
