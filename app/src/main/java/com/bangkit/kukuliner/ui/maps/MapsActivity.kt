@@ -52,7 +52,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val latLng = LatLng(culinary!!.lon, culinary.lat)
 
         mMap.addMarker(
-            MarkerOptions().position(latLng).title(culinary!!.name)
+            MarkerOptions().position(latLng).title(culinary!!.nama)
                 .snippet(culinary.estimatePrice)
         )
         boundsBuilder.include(latLng)

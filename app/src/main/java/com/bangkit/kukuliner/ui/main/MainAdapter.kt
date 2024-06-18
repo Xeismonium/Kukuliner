@@ -54,7 +54,7 @@ class MainAdapter(private val onFavoriteClick: (CulinaryResponseItem) -> Unit) :
 
     class MainViewHolder(val binding: FoodItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(culinary: CulinaryResponseItem) {
-            binding.foodName.text = culinary.name
+            binding.foodName.text = culinary.nama
             binding.foodPrice.text = culinary.estimatePrice
             Glide.with(itemView.context)
                 .load(culinary.photoUrl)

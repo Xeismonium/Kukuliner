@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
             }
             is Result.Error -> {
                 binding.progressBar.visibility = GONE
-                Toast.makeText(this, "Gagal ambil data ${result.error} ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.failed_get_data, result.error), Toast.LENGTH_SHORT).show()
             }
         }
     }

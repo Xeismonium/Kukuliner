@@ -11,9 +11,9 @@ interface ApiService {
     suspend fun getAllCulinary(
     ): CulinaryResponse
 
-    @GET("api/culinary/search/{query}")
+    @GET("api/culinary/search")
     suspend fun searchCulinary(
-        @Path("query") query: String
+        @Query("name") name: String
     ): CulinaryResponse
 
     @GET("api/culinary/recommendations")

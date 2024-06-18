@@ -23,13 +23,13 @@ interface CulinaryDao {
     @Query("SELECT * FROM culinary")
     fun getCulinary(): LiveData<List<CulinaryResponseItem>>
 
-    @Query("SELECT * FROM culinary WHERE name LIKE '%' || :query || '%'")
+    @Query("SELECT * FROM culinary WHERE nama LIKE '%' || :query || '%'")
     fun searchCulinary(query: String): LiveData<List<CulinaryResponseItem>>
 
     @Query("SELECT * FROM culinary WHERE isFavorite = 1")
     fun getFavoriteCulinary(): LiveData<List<CulinaryResponseItem>>
 
-    @Query("SELECT * FROM culinary WHERE isFavorite = 1 AND name LIKE '%' || :query || '%'")
+    @Query("SELECT * FROM culinary WHERE isFavorite = 1 AND nama LIKE '%' || :query || '%'")
     fun searchFavoriteCulinary(query: String): LiveData<List<CulinaryResponseItem>>
 
     @Query("DELETE FROM culinary WHERE isFavorite = 0")

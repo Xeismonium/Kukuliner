@@ -42,7 +42,7 @@ class ResultScanActivity : AppCompatActivity() {
 
         binding.imgPhotoFood.setImageURI(intent.extras?.getString(FoodScanActivity.IMAGE_CLASS)!!.toUri())
         binding.txResultName.text = label
-        binding.txPredict.text = "Akurasi: ${intent.extras?.getString(FoodScanActivity.SCORE).toString()}"
+        binding.txPredict.text = getString(R.string.accurate, intent.extras?.getString(FoodScanActivity.SCORE).toString())
 
         initAdapter(label)
 
@@ -59,13 +59,11 @@ class ResultScanActivity : AppCompatActivity() {
             } else {
                 viewModel.saveCulinary(culinary)
             }
-            Log.d("MainAdapter", "Adapter Defined")
         }
 
         binding.rvSimiliarFood.apply {
             setHasFixedSize(true)
             this.adapter = culinaryAdapter
-            Log.d("MainAdapter", "Applying Adapter")
         }
 
         searchCulinary(label)
@@ -76,7 +74,6 @@ class ResultScanActivity : AppCompatActivity() {
         viewModel.searchCulinary(query).observe(this) { result ->
             handleResult(result)
         }
-        Log.d("MainAdapter", "Searching Data")
     }
 
     private fun handleResult(result: Result<List<CulinaryResponseItem>>) {
@@ -90,7 +87,7 @@ class ResultScanActivity : AppCompatActivity() {
             }
             is Result.Error -> {
                 binding.progressBar.visibility = GONE
-                Toast.makeText(this, "Gagal ambil data ${result.error} ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.failed_get_data, result.error), Toast.LENGTH_SHORT).show()
             }
         }
     }

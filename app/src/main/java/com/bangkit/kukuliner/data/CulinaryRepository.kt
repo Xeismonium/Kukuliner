@@ -54,7 +54,7 @@ class CulinaryRepository private constructor(
                 val isFavorite = culinaryDao.isFavorite(culinary.id)
                 CulinaryResponseItem(
                     culinary.id,
-                    culinary.name,
+                    culinary.nama,
                     culinary.description,
                     culinary.photoUrl,
                     culinary.estimatePrice,
@@ -83,7 +83,7 @@ class CulinaryRepository private constructor(
                 val isFavorite = culinaryDao.isFavorite(culinary.id)
                 CulinaryResponseItem(
                     culinary.id,
-                    culinary.name,
+                    culinary.nama,
                     culinary.description,
                     culinary.photoUrl,
                     culinary.estimatePrice,
@@ -100,7 +100,7 @@ class CulinaryRepository private constructor(
         }
         val localData: LiveData<Result<List<CulinaryResponseItem>>> =
             culinaryDao.searchCulinary(query).map { results ->
-                val filteredResults = results.filter { it.name.contains(query, ignoreCase = true) || it.isFavorite }
+                val filteredResults = results.filter { it.nama.contains(query, ignoreCase = true) || it.isFavorite }
                 Result.Success(filteredResults)
             }
         emitSource(localData)
@@ -117,7 +117,7 @@ class CulinaryRepository private constructor(
                 val isFavorite = culinaryDao.isFavorite(culinary.id)
                 CulinaryResponseItem(
                     culinary.id,
-                    culinary.name,
+                    culinary.nama,
                     culinary.description,
                     culinary.photoUrl,
                     culinary.estimatePrice,

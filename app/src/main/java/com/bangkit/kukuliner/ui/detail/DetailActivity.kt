@@ -55,7 +55,7 @@ class DetailActivity : AppCompatActivity() {
             .load(culinary?.photoUrl)
             .into(binding.imgPhotoFood)
 
-        binding.txNameFood.text = culinary?.name
+        binding.txNameFood.text = culinary?.nama
         binding.txDescFood.text = culinary?.description
         binding.txEstimatePrice.text = getString(R.string.estimate_price_rp, culinary?.estimatePrice)
 

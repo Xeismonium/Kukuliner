@@ -18,14 +18,12 @@ class FavoriteViewModel(private val repository: CulinaryRepository) : ViewModel(
     fun saveCulinary(culinary: CulinaryResponseItem) {
         viewModelScope.launch {
             repository.setFavoriteCulinary(culinary, true)
-            Log.d("FavoriteViewModel", "Culinary saved: ${culinary.name}")
         }
     }
 
     fun deleteCulinary(culinary: CulinaryResponseItem) {
         viewModelScope.launch {
             repository.setFavoriteCulinary(culinary, false)
-            Log.d("FavoriteViewModel", "Culinary deleted: ${culinary.name}")
         }
     }
 }

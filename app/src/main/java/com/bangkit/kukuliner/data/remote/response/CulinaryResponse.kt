@@ -21,8 +21,8 @@ data class CulinaryResponseItem(
 	@field:SerializedName("id")
 	val id: String,
 
-	@field:SerializedName("name")
-	val name: String,
+	@field:SerializedName("nama")
+	val nama: String,
 
 	@field:SerializedName("description")
 	val description: String,
