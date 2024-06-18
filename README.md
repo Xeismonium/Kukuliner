@@ -1,3 +1,5 @@
+<p align="center"><a href="https://github.com/Xeismonium/Kukuliner" target="_blank"><img src="https://github.com/Xeismonium/Kukuliner/blob/android/app/src/main/res/drawable/logcap.png?raw=true" width="400" alt="Laravel Logo"></a></p>
+
 # Kukuliner
 Bangkit Capstone Batch 1 2024
 
