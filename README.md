@@ -1,9 +1,9 @@
 <p align="center"><a href="https://github.com/Xeismonium/Kukuliner" target="_blank"><img src="https://github.com/Xeismonium/Kukuliner/blob/android/app/src/main/res/drawable/logcap.png?raw=true" width="400" alt="Laravel Logo"></a></p>
 
 # Kukuliner
-Bangkit Capstone Batch 1 2024
+Kukuliner is a capstone project developed to address the challenge of accessing comprehensive and reliable information about Javanese cuisine. The platform aims to enhance the culinary tourism experience by providing detailed insights into local dishes and their locations, thus supporting local businesses and promoting Java's rich culinary heritage.
 
-## Capstone Project Team:
+## Capstone Project Team
 
 | Name | Bangkit-ID | GitHub |
 |--------------------------------|------------|----------------|
@@ -14,3 +14,16 @@ Bangkit Capstone Batch 1 2024
 | Muhammad Sopian | C299D4KY1067 | [msopiann](https://github.com/msopiann) |
 | Muhammad Alfan Ghifari | A187D4KY4320 | [Xeismonium](https://github.com/Xeismonium) |
 | Fadly Oktapriadi | A187D4KY4109 | [fadlyoktapriadi](https://github.com/fadlyoktapriadi) |
+
+## Repository
+
+### Cloud Computing
+- [Kukuliner-API](https://github.com/Xeismonium/Kukuliner/tree/cloud-computing)
+
+### Machine Learning
+- [Kukuliner-ML](https://github.com/Xeismonium/Kukuliner/tree/machine-learning)
+
+### Mobile Development
+- [Kukuliner-Android](https://github.com/Xeismonium/Kukuliner/tree/android)
+
+## Screenshot
