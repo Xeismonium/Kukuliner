@@ -24,6 +24,7 @@
     <string name="location_found">Location Found</string>
     <string name="location_error_name">Failed Get Location Name: %1$s</string>
     <string name="no_data_found">No Data Found</string>
+    <string name="no_recommendation_found">No Recommendation Found</string>
     <string name="camera" translatable="false">Camera</string>
     <string name="gallery" translatable="false">Gallery</string>
     <string name="scan_food" translatable="false">Scan Food</string>

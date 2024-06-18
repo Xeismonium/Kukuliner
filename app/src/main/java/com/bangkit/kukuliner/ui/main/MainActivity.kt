@@ -200,7 +200,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateEmptyView(data: List<CulinaryResponseItem>) {
-        binding.noData.visibility = if (data.isEmpty()) VISIBLE else GONE
+        if (binding.searchBar.text.isNotEmpty()) {
+            binding.noData.visibility = if (data.isEmpty()) VISIBLE else GONE
+        } else {
+            binding.noRecommendation.visibility = if (data.isEmpty()) VISIBLE else GONE
+        }
     }
 
     /*
