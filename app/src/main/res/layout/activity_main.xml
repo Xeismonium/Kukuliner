@@ -42,6 +42,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="15dp"
+        android:contentDescription="@string/map_icon"
         android:src="@drawable/map"
         app:layout_constraintLeft_toLeftOf="@id/search_bar"
         app:layout_constraintTop_toBottomOf="@id/search_bar" />
@@ -61,20 +62,27 @@
         app:layout_constraintEnd_toEndOf="@id/search_bar"
         app:layout_constraintTop_toTopOf="@id/map_icon" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFood"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="16dp"
-        tools:listitem="@layout/food_item"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
+        app:layout_constraintTop_toBottomOf="@id/map_icon"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/map_icon" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFood"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/food_item"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView
         android:id="@+id/no_data"

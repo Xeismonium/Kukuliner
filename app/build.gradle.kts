@@ -1,5 +1,3 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -20,7 +18,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BaseURL", "\"https://capstone-kukuliner.vercel.app/api/\"")
+        buildConfigField("String", "BaseURL", "\"https://kukuliner-6gnnh6juda-et.a.run.app/\"")
     }
 
     buildTypes {
@@ -105,4 +103,7 @@ dependencies {
     implementation(libs.tensorflow.lite.metadata)
     implementation(libs.tensorflow.lite.support)
     implementation(libs.tensorflow.lite.task.vision)
+
+    // Swipe Refresh
+    implementation(libs.androidx.swiperefreshlayout)
 }

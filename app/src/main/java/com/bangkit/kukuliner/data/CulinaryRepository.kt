@@ -108,7 +108,7 @@ class CulinaryRepository private constructor(
 
     fun getRecommendationsCulinary(lat: Double, lon: Double): LiveData<Result<List<CulinaryResponseItem>>> = liveData {
         emit(Result.Loading)
-        var recommendedIds = emptySet<String>()
+        var recommendedIds = emptySet<Int>()
         try {
             val response = apiService.getRecommendationsCulinary(lat, lon)
             val listKuliner = response.listKuliner

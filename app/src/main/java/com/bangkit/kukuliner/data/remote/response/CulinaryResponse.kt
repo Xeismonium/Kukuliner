@@ -19,7 +19,7 @@ data class CulinaryResponseItem(
 
 	@PrimaryKey
 	@field:SerializedName("id")
-	val id: String,
+	val id: Int,
 
 	@field:SerializedName("nama")
 	val nama: String,

@@ -33,4 +33,5 @@
     <string name="title_activity_maps" translatable="false">MapsActivity</string>
     <string name="accurate">Accurate: %1$s</string>
     <string name="failed_get_data">Failed Get Data: %1$s</string>
+    <string name="map_icon">Map Icon</string>
 </resources>

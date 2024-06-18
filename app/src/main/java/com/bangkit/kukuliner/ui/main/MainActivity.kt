@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         initAdapter()
         initSearchBar()
         initFoodScan()
+        refreshData()
     }
 
     /*
@@ -135,15 +136,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleResult(result: Result<List<CulinaryResponseItem>>) {
         when (result) {
-            is Result.Loading -> binding.progressBar.visibility = VISIBLE
+            is Result.Loading -> {
+                if (!binding.swipeRefresh.isRefreshing) {
+                    binding.progressBar.visibility = VISIBLE
+                }
+            }
             is Result.Success -> {
-                binding.progressBar.visibility = GONE
+                if (binding.swipeRefresh.isRefreshing) {
+                    binding.swipeRefresh.isRefreshing = false
+                } else {
+                    binding.progressBar.visibility = GONE
+                }
                 val culinaryData = result.data
                 culinaryAdapter.submitList(culinaryData)
                 updateEmptyView(culinaryData)
             }
             is Result.Error -> {
-                binding.progressBar.visibility = GONE
+                if (binding.swipeRefresh.isRefreshing) {
+                    binding.swipeRefresh.isRefreshing = false
+                } else {
+                    binding.progressBar.visibility = GONE
+                }
                 Toast.makeText(this, getString(R.string.failed_get_data, result.error), Toast.LENGTH_SHORT).show()
             }
         }
@@ -256,6 +269,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun refreshData() {
+        binding.swipeRefresh.setOnRefreshListener {
+            getLocation()
+            performFetchBasedOnState()
+        }
+    }
+
+    /*
+     * Food Scan
+     */
 
     private fun initFoodScan() {
         binding.fabScanfood.setOnClickListener {

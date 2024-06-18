@@ -36,5 +36,5 @@ interface CulinaryDao {
     suspend fun deleteAll()
 
     @Query("SELECT EXISTS(SELECT * FROM culinary WHERE id = :id AND isFavorite = 1)")
-    suspend fun isFavorite(id: String): Boolean
+    suspend fun isFavorite(id: Int): Boolean
 }

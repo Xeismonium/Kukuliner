@@ -27,4 +27,5 @@
     <string name="similiar_food">Similiar Food</string>
     <string name="accurate">Akurasi: %1$s</string>
     <string name="failed_get_data">Gagal Ambil Data: %1$s</string>
+    <string name="map_icon">Ikon Peta</string>
 </resources>
