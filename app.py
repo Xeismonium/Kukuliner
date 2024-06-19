@@ -127,6 +127,7 @@ def search_restaurants_by_name(
                             "id": row["id"],
                             "nama": row["nama"],
                             "description": row["description"],
+                            "photoUrl": row["photoUrl"],
                             "estimatePrice": row["estimatePrice"],
                             "latitude": restaurant_lat,
                             "longitude": restaurant_lon,
@@ -136,7 +137,7 @@ def search_restaurants_by_name(
         else:
             results.extend(
                 filtered_restaurants[
-                    ["id", "nama", "description", "estimatePrice", "lat", "lon"]
+                    ["id", "nama", "description", "photoUrl", "estimatePrice", "lat", "lon"]
                 ].to_dict(orient="records")
             )
 
