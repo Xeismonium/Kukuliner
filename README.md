@@ -1,10 +1,10 @@
 <p align="center"><a href="https://github.com/Xeismonium/Kukuliner" target="_blank"><img src="https://github.com/Xeismonium/Kukuliner/blob/android/app/src/main/res/drawable/logcap.png?raw=true" width="400" alt="Kukuliner Logo"></a></p>
 
 # Kukuliner
-Kukuliner is a capstone project developed to address the challenge of accessing comprehensive and reliable information about Javanese cuisine. The platform aims to enhance the culinary tourism experience by providing detailed insights into local dishes and their locations, thus supporting local businesses and promoting Java's rich culinary heritage.
+<p align="justify">Kukuliner is a capstone project developed to address the challenge of accessing comprehensive and reliable information about Javanese cuisine. The platform aims to enhance the culinary tourism experience by providing detailed insights into local dishes and their locations, thus supporting local businesses and promoting Java's rich culinary heritage.</p>
 
 ## Capstone Project Team
-
+### Team ID: C241-PS080
 | Name | Bangkit-ID | GitHub |
 |--------------------------------|------------|----------------|
 | Muhammad Alfin Fatahillah | M009D4KY1975 | [AlfinFatahilah](https://github.com/AlfinFatahilah) |
