@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/Xeismonium/Kukuliner" target="_blank"><img src="https://github.com/Xeismonium/Kukuliner/blob/android/app/src/main/res/drawable/logcap.png?raw=true" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://github.com/Xeismonium/Kukuliner" target="_blank"><img src="https://github.com/Xeismonium/Kukuliner/blob/android/app/src/main/res/drawable/logcap.png?raw=true" width="400" alt="Kukuliner Logo"></a></p>
 
 # Kukuliner
 Kukuliner is a capstone project developed to address the challenge of accessing comprehensive and reliable information about Javanese cuisine. The platform aims to enhance the culinary tourism experience by providing detailed insights into local dishes and their locations, thus supporting local businesses and promoting Java's rich culinary heritage.
@@ -27,3 +27,11 @@ Kukuliner is a capstone project developed to address the challenge of accessing 
 - [Kukuliner-Android](https://github.com/Xeismonium/Kukuliner/tree/android)
 
 ## Screenshot
+<p align="center">
+  <img src="https://github.com/Xeismonium/Kukuliner/blob/main/screenshots/Screenshot_20240619_064304.png?raw=true" width="200">
+  <img src="https://github.com/Xeismonium/Kukuliner/blob/main/screenshots/Screenshot_20240619_064327.png?raw=true" width="200">
+  <img src="https://github.com/Xeismonium/Kukuliner/blob/main/screenshots/Screenshot_20240619_064352.png?raw=true" width="200">
+  <img src="https://github.com/Xeismonium/Kukuliner/blob/main/screenshots/Screenshot_20240619_064431.png?raw=true" width="200">
+  <img src="https://github.com/Xeismonium/Kukuliner/blob/main/screenshots/Screenshot_20240619_064550.png?raw=true" width="200">
+  <img src="https://github.com/Xeismonium/Kukuliner/blob/main/screenshots/Screenshot_20240619_064620.png?raw=true" width="200">
+</p>
