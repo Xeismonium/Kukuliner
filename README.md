@@ -31,6 +31,9 @@
 ### Landing Page
 - https://kukuliner.site/
 
+### Documentation
+- https://kukuliner.site/docs/getting-started
+
 ### API
 - https://api.kukuliner.site/
 
