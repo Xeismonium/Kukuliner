@@ -41,6 +41,8 @@
 - Flask
 - Google Maps API
 - Tensorflow Lite
+- mysqlclient
+- for detail please check requirements.txt
 
 ## Screenshot
 <p align="center">
