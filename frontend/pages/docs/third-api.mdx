@@ -1,0 +1,110 @@
+---
+title: Third API References
+---
+
+# Third Party API References
+
+## Using Google Maps Distance Matrix API
+
+### 1. Why Google Maps Distance Matrix API?
+
+Initially, we considered using the Haversine formula to calculate distances. However, the Haversine formula calculates distances along a straight line, disregarding real-world road conditions such as turns, bends, and traffic patterns. This can lead to inaccurate distance estimates.
+
+For instance, the Haversine formula might calculate the distance between locations A and B as 700 meters. However, the actual driving distance between these locations could be 1 kilometer due to road bends.
+
+These inaccuracies can significantly impact our project, as we limit food recommendations to a 20-kilometer radius from the user's location. Using the Haversine formula could result in recommendations beyond the intended 20-kilometer radius, potentially leading to dissatisfied users.
+
+Therefore, we opted to utilize the Google Maps Distance Matrix API. This API takes into account real-world road conditions, providing more accurate distance estimates and ensuring that our food recommendations remain within the specified 20-kilometer radius.
+
+| Feature                     | Haversine Formula                                 | Google Maps Distance Matrix API                                               |
+| --------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Distance calculation        | Straight-line distance                            | Real-world road-based distance                                                |
+| Accuracy                    | Less accurate due to disregarding road conditions | More accurate due to considering road conditions                              |
+| Suitability for our project | Limited due to potential inaccuracies             | Well-suited due to higher accuracy and adherence to 20-kilometer radius limit |
+
+By employing the Google Maps Distance Matrix API, we can ensure that our project delivers accurate and reliable distance information, enhancing user satisfaction and project effectiveness.
+
+### 2. How We Use the API
+
+**Example using python:**
+
+```python {3} copy
+import googlemaps
+
+def get_distance_with_google_maps(latitude1, longitude1, latitude2, longitude2):
+    """Menggunakan Google Maps Distance Matrix API untuk menghitung jarak antara dua titik."""
+    gmaps = googlemaps.Client(key=os.getenv("GMAPS_API"))
+    origin = f"{latitude1},{longitude1}"
+    destination = f"{latitude2},{longitude2}"
+    distance_matrix = gmaps.distance_matrix(origin, destination)
+
+    if distance_matrix["rows"][0]["elements"][0]["status"] == "ZERO_RESULTS":
+        return None
+
+    distance = distance_matrix["rows"][0]["elements"][0]["distance"]["value"] / 1000
+    return distance
+```
+
+**Base URL and Endpoint:**
+
+```sh {3} copy
+https://maps.googleapis.com/maps/api/distancematrix/json?destinations=<latitude_value>,<longitude_value>&origins=<latitude_value>,<longitude_value>&travelMode=driving&key=<API_KEY>
+```
+
+**Parameters:**
+
+- `origin` = user's latitude and longitude
+- `destinations` = latitude and longitude of the recommended place
+- `key` = your own GMAPS API KEY
+
+**Example of Response (if success):**
+
+```json
+{
+  "destination_addresses": ["Kota New York, New York, Amerika Serikat"],
+  "origin_addresses": ["Washington, Distrik Kolombia, Amerika Serikat"],
+  "rows": [
+    {
+      "elements": [
+        {
+          "distance": {
+            "text": "362 km",
+            "value": 361717
+          },
+          "duration": {
+            "text": "3 jam 50 min",
+            "value": 13826
+          },
+          "status": "OK"
+        }
+      ]
+    }
+  ],
+  "status": "OK"
+}
+```
+
+**Example of Response (if failed):**
+
+```json
+{
+  "destination_addresses": ["-6.143376,106.149564"],
+  "origin_addresses": ["6.143376,106.149564"],
+  "rows": [
+    {
+      "elements": [
+        {
+          "status": "ZERO_RESULTS"
+        }
+      ]
+    }
+  ],
+  "status": "OK"
+}
+```
+
+### 3. Benefits of Using This API
+
+- **Accuracy:** Google Maps leverages real-world data to provide accurate distance calculations.
+- **Efficiency:** The API offers a fast and reliable way to retrieve distances.
+- **Flexibility:** The API supports various travel modes (driving, walking, etc.) which can be incorporated in the future.

@@ -1,0 +1,29 @@
+{
+  "getting-started": {
+    "title": "Getting Started",
+    "theme": {
+      "footer": false
+    }
+  },
+
+  "api": {
+    "title": "API References",
+    "theme": {
+      "footer": false
+    }
+  },
+
+  "third-api": {
+    "title": "Third Party API References",
+    "theme": {
+      "footer": false
+    }
+  },
+
+  "installation": {
+    "title": "Running the Project Manually",
+    "theme": {
+      "footer": false
+    }
+  }
+}

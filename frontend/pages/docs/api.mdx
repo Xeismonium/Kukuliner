@@ -1,0 +1,154 @@
+---
+title: API References
+---
+
+# API References
+
+## Endpoints
+
+### 1. `getAllData`
+
+Retrieve a list of all restaurants in the database.
+
+**Endpoint:**
+
+```sh {3} copy
+GET /api/culinary
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": "1",
+    "name": "Sate Bandeng",
+    "description": "Sate Bandeng adalah masakan tradisional khas Banten, Indonesia. Sate Bandeng dibuat dari ikan bandeng yang dihilangkan durinya, dagingnya dibumbui dan dimasukkan kembali ke kulitnya, lalu ditusuk atau dijepit tusukan tangkai bambu, lalu dibakar di atas bara arang.",
+    "photoUrl": "https://ik.imagekit.io/tvlk/blog/2021/06/sate-bandeng-_shutterstock_1893274882.jpg",
+    "estimatePrice": "Rp25.000 - Rp40.000",
+    "lat": -6.120694599999999,
+    "lon": 106.1501611
+  },
+  {
+    "id": "2",
+    "name": "Nasi Goreng Kambing",
+    "description": "Nasi Goreng Kambing adalah hidangan nasi goreng khas Indonesia yang menggunakan daging kambing dan rempah-rempah.",
+    "photoUrl": "https://ik.imagekit.io/tvlk/blog/2021/06/nasi-goreng-kambing.jpg",
+    "estimatePrice": "Rp30.000 - Rp50.000",
+    "lat": -6.210694599999999,
+    "lon": 106.8501611
+  }
+]
+```
+
+### 2. `getDataById`
+
+Retrieve detailed information about a specific restaurant by its ID.
+
+**Endpoint:**
+
+```sh {3} copy
+GET /api/culinary/{id}
+```
+
+**Parameters:**
+
+- `id` (id): The unique identifier of the restaurant.
+
+**Response:**
+
+```json
+{
+  "id": "1",
+  "name": "Sate Bandeng",
+  "description": "Sate Bandeng adalah masakan tradisional khas Banten, Indonesia. Sate Bandeng dibuat dari ikan bandeng yang dihilangkan durinya, dagingnya dibumbui dan dimasukkan kembali ke kulitnya, lalu ditusuk atau dijepit tusukan tangkai bambu, lalu dibakar di atas bara arang.",
+  "photoUrl": "https://ik.imagekit.io/tvlk/blog/2021/06/sate-bandeng-_shutterstock_1893274882.jpg",
+  "estimatePrice": "Rp25.000 - Rp40.000",
+  "lat": -6.120694599999999,
+  "lon": 106.1501611
+}
+```
+
+### 3. `search`
+
+Retrieve information about restaurants based on name and optional location parameters.
+
+**Endpoint:**
+
+```sh {3} copy
+GET /api/culinary/search?name=<value>&lat=<value>&lon=<value>
+```
+
+**Parameters:**
+
+- `name` (string, multiple): The name(s) of the restaurant(s) to search for. Multiple names can be specified by repeating the `name` parameter.
+- `lat` (float, optional): The latitude of the restaurant's location.
+- `lon` (float, optional): The longitude of the restaurant's location.
+
+**Response:**
+
+```json
+[
+  {
+    "id": "1",
+    "name": "Sate Bandeng",
+    "description": "Sate Bandeng adalah masakan tradisional khas Banten, Indonesia. Sate Bandeng dibuat dari ikan bandeng yang dihilangkan durinya, dagingnya dibumbui dan dimasukkan kembali ke kulitnya, lalu ditusuk atau dijepit tusukan tangkai bambu, lalu dibakar di atas bara arang.",
+    "photoUrl": "https://ik.imagekit.io/tvlk/blog/2021/06/sate-bandeng-_shutterstock_1893274882.jpg",
+    "estimatePrice": "Rp25.000 - Rp40.000",
+    "lat": -6.120694599999999,
+    "lon": 106.1501611
+  },
+  {
+    "id": "3",
+    "name": "Bandeng Presto",
+    "description": "Bandeng Presto adalah ikan bandeng yang dimasak dengan presto hingga tulang-tulangnya lunak dan dapat dimakan.",
+    "photoUrl": "https://ik.imagekit.io/tvlk/blog/2021/06/bandeng-presto.jpg",
+    "estimatePrice": "Rp20.000 - Rp35.000",
+    "lat": -6.190694599999999,
+    "lon": 106.7501611
+  }
+]
+```
+
+> [!NOTE]
+> If you send a request with only the name parameter, it will display related data regardless of the distance from your location. If you also include the lat and lon parameters, it will display related data that is only within the vicinity of your location.
+
+### 4. `getUserRecommendation`
+
+Retrieve restaurant recommendations for a user based on their location.
+
+**Endpoint:**
+
+```sh {3} copy
+GET /api/culinary/recommendations?lat=<value>&lon=<value>
+```
+
+**Parameters:**
+
+- `lat` (float): The user's latitude coordinate.
+- `lon` (float): The user's longitude coordinate.
+
+**Response:**
+
+```json
+[
+  {
+    "id": "4",
+    "name": "Bakso Malang",
+    "description": "Bakso Malang adalah bakso khas Malang yang disajikan dengan tahu, siomay, dan mie kuning.",
+    "photoUrl": "https://ik.imagekit.io/tvlk/blog/2021/06/bakso-malang.jpg",
+    "estimatePrice": "Rp15.000 - Rp30.000",
+    "lat": -7.120694599999999,
+    "lon": 112.7501611
+  },
+  {
+    "id": "5",
+    "name": "Mie Ayam Jakarta",
+    "description": "Mie Ayam Jakarta adalah mie ayam dengan tambahan bakso, pangsit, dan sayuran segar.",
+    "photoUrl": "https://ik.imagekit.io/tvlk/blog/2021/06/mie-ayam-jakarta.jpg",
+    "estimatePrice": "Rp20.000 - Rp35.000",
+    "lat": -6.210694599999999,
+    "lon": 106.8501611
+  }
+]
+```

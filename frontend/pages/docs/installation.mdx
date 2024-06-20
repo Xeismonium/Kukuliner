@@ -1,0 +1,110 @@
+---
+title: Running the Project Manually
+---
+
+# Running the Project Locally
+
+This guide will help you set up and run the project locally. Before you begin, ensure you have the following prerequisites:
+
+- A database set up for culinary data.
+- A Google Maps API key.
+- Model from Keras Tensorflow
+
+## Prerequisites
+
+### 1. Database Setup
+
+Ensure you have a database configured for storing culinary data. The database details should be available and accessible. You can use any relational database (e.g., MySQL, PostgreSQL, SQLite).
+
+### 2. Google Maps API Key
+
+Obtain a Google Maps API key. Follow the instructions on the [Google Cloud Platform](https://cloud.google.com/maps-platform/) to generate your API key.
+
+## Steps to Run the Project Locally
+
+### 1. Clone the Repository
+
+First, clone the project repository to your local machine:
+
+```sh {3} copy
+git clone -b cloud-computing https://github.com/Xeismonium/Kukuliner.git
+cd your-repository
+```
+
+### 2. Create a Virtual Environment
+
+Create a virtual environment to manage your project dependencies:
+
+```sh {3} copy
+python -m venv venv
+```
+
+Activate the virtual environment:
+
+- On Windows:
+
+  ```sh {3} copy
+  venv\Scripts\activate
+  ```
+
+- On macOS/Linux:
+
+  ```sh {3} copy
+  source venv/bin/activate
+  ```
+
+### 3. Install Dependencies
+
+Install the required dependencies using `pip`:
+
+```sh {3} copy
+pip install -r requirements.txt
+```
+
+### 4. Configure Environment Variables
+
+Create a `.env` file in the root of your project directory and add the following environment variables:
+
+```env {3} copy
+DB_HOST=xxx
+DB_USER=xxx
+DB_PASSWORD=xxx
+DB_DATABASE=xxx
+MODEL_URL=xxx
+GMAPS_API=xxx
+
+FLASK_DEBUG=1
+PORT=8080
+```
+
+Replace all of these with with your actual data.
+
+### 5. Run the Flask Application
+
+Start the Flask development server:
+
+```sh
+flask run
+```
+
+By default, the Flask application will run on `http://127.0.0.1:5000/`.
+
+> [!NOTE]
+> PORT 8080 in ENV is for use in the production stage.
+
+## Accessing the Application
+
+Open your web browser and navigate to `http://127.0.0.1:5000/` to access the application.
+
+## Troubleshooting
+
+- Ensure your virtual environment is activated before running commands.
+- Double-check your environment variables in the `.env` file.
+- Verify that your database is running and accessible.
+- Check the console output for any error messages and stack traces.
+
+For further assistance, refer to the project documentation or raise an issue on the project's repository.
+
+---
+
+This documentation should help you set up and run the project locally. If you have any questions or need additional support, feel free to reach out to the project maintainers.
