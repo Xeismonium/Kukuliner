@@ -39,7 +39,7 @@ def get_db_connection():
 def get_data_from_db():
     """Mengambil data restoran dari database."""
     conn = get_db_connection()
-    query = "SELECT * FROM mytable"
+    query = "SELECT * FROM listKuliner"
     df = pd.read_sql(query, conn)
     df["id"] = df["id"].astype(int)
     conn.close()
