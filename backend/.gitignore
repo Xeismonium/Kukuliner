@@ -9,4 +9,4 @@ htmlcov/
 .tox/
 docs/_build/
 .env
-
+temp_model.tflite
